@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+// import styles from '../styles/Home.module.css'
 import React, { useState, useEffect } from 'react'
 
 export default function Home() {
@@ -35,36 +35,42 @@ export default function Home() {
         setFormResMessage([json.message]);
     }
   }
-
   return (
-    <div className={styles.container}>
+    <div >
       <Head>
         <title>EnergyPal Take-Home Test</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://energypal.com">EnergyPal!</a>
+      <main className="w-screen h-screen flex items-center justify-center bg-gray-50">
+        <div>
+        <h1 className="text-5xl font-semibold text-gray-800 mb-12">
+          Welcome to <a className="text-blue-500" href="https://energypal.com">EnergyPal!</a>
         </h1>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-        <div>
           <form onSubmit={addCustomer} method="POST">
-            <label htmlFor="first_name">First Name:</label>
-            <input id="first_name" type="text" name="first_name" required /><br/>
-            <label htmlFor="last_name">Last Name:</label>
-            <input id="last_name" type="text" name="last_name" required /><br/>
-            <label htmlFor="email">Email:</label>
-            <input id="email" type="email" name="email" required /><br/>
-            <label htmlFor="phone">Phone:</label>
-            <input id="phone" type="tel" name="phone" required /><br/>
-            <label htmlFor="zip">Zip:</label>
-            <input id="zip" type="text" name="zip" required pattern="\d{5}"/><br/>
-            <button type="submit">Submit</button>
+            <label htmlFor="first_name">
+              <span className="text-xs font-medium text-gray-700" >First Name</span>
+              <input className="border rounded text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none w-full p-2" id="first_name" type="text" name="first_name" required placeholder="Your first name"/><br/>
+            </label><br/>
+            <label htmlFor="last_name">
+              <span className="text-xs font-medium text-gray-700" >Last Name</span>
+              <input className="border rounded text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none w-full p-2"  id="last_name" type="text" name="last_name" required placeholder="Your last name"/><br/>
+              </label><br/>
+            <label htmlFor="email">
+              <span className="text-xs font-medium text-gray-700" >Email</span>
+              <input className="border rounded text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none w-full p-2"  id="email" type="email" name="email" required placeholder="Ex. billgates@microsoft.com"/><br/>
+            </label><br/>
+            <label htmlFor="phone">
+              <span className="text-xs font-medium text-gray-700" >Phone</span>
+              <input className="border rounded text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none w-full p-2"  id="phone" type="tel" name="phone" required placeholder="Your phone number"/><br/>
+            </label><br/>
+            
+            <label htmlFor="zip">
+              <span className="text-xs font-medium text-gray-700" >Zip</span>
+              <input className="border rounded text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none w-full p-2"  id="zip" type="text" name="zip" required pattern="\d{5}" placeholder="90210"/><br/>
+            </label><br/>
+            <button className="bg-blue-500 hover:bg-blue-700 rounded text-white w-full py-2" type="submit">Submit</button>
             {formResMessage.map(i => {return <div>{i}</div>})
           }
           </form>
