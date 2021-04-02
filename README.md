@@ -22,7 +22,7 @@ When you are finished, submit your work as a `pull request` back to this reposit
 ### Requirements
 
 1. Update a web form found at `pages/index.js` according to best practices with fields for first name, last name, email, phone and US zip code (5 numeric digits).
-2. Style the web page & form (feel free to borrow styles from the form at https://energypal.com/#start). Make it look nice!
+2. Style the web page & form (feel free to borrow styles from the pages at [1](https://energypal.com/#start), [2](https://solar.energypal.com/2)). Make it look nice!
 3. Add validation to the form to prevent invalid values from being submitted.
 4. Submit the form submissions via HTTP POST to `/api/submissions`.
 5. Let the user know if the form was submitted successfully or not.
