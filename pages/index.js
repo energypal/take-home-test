@@ -43,34 +43,35 @@ export default function Home() {
       </Head>
 
       <main className="w-screen h-screen flex items-center justify-center bg-gray-50">
-        <div>
-        <h1 className="text-5xl font-semibold text-gray-800 mb-12">
+        <div className="w-screen mx-4 sm:w-10/12 md:w-6/12 lg:w-96 md:border md:rounded-xl md:p-5 md:bg-white">
+        <h1 className="text-3xl font-semibold text-gray-800 mb-8">
           Welcome to <a className="text-blue-500" href="https://energypal.com">EnergyPal!</a>
         </h1>
 
-          <form onSubmit={addCustomer} method="POST">
+          <form className="grid grid-cols-1 gap-3" onSubmit={addCustomer} method="POST">
             <label htmlFor="first_name">
               <span className="text-xs font-medium text-gray-700" >First Name</span>
               <input className="border rounded text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none w-full p-2" id="first_name" type="text" name="first_name" required placeholder="Your first name"/><br/>
-            </label><br/>
+            </label>
             <label htmlFor="last_name">
               <span className="text-xs font-medium text-gray-700" >Last Name</span>
               <input className="border rounded text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none w-full p-2"  id="last_name" type="text" name="last_name" required placeholder="Your last name"/><br/>
-              </label><br/>
+            </label>
             <label htmlFor="email">
               <span className="text-xs font-medium text-gray-700" >Email</span>
               <input className="border rounded text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none w-full p-2"  id="email" type="email" name="email" required placeholder="Ex. billgates@microsoft.com"/><br/>
-            </label><br/>
+            </label>
             <label htmlFor="phone">
               <span className="text-xs font-medium text-gray-700" >Phone</span>
               <input className="border rounded text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none w-full p-2"  id="phone" type="tel" name="phone" required placeholder="Your phone number"/><br/>
-            </label><br/>
-            
+            </label>
             <label htmlFor="zip">
               <span className="text-xs font-medium text-gray-700" >Zip</span>
               <input className="border rounded text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none w-full p-2"  id="zip" type="text" name="zip" required pattern="\d{5}" placeholder="90210"/><br/>
-            </label><br/>
-            <button className="bg-blue-500 hover:bg-blue-700 rounded text-white w-full py-2 shadow-md" type="submit">Submit</button>
+            </label>
+            <div className="flex justify-end mt-4">
+              <button className="bg-blue-500 hover:bg-blue-700 rounded text-white w-full md:w-auto py-2 md:px-6 shadow-md" type="submit">Submit</button>
+            </div>
             {formResMessage.map(i => {
               if (i.status === 'unavailable' || i.status === 'error') {
                 return <div className="text-red-700 text-sm flex items-center mt-4 w-full justify-center">
@@ -86,7 +87,6 @@ export default function Home() {
                   </svg>
                   <span className="ml-1">{i.message}</span></div>
               }
-              
             })
           }
           </form>
