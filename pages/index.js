@@ -1,11 +1,16 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import React, { useState, useEffect } from 'react'
 
 export default function Home() {
+  const [ formResMessage, setFormResMessage ] = useState([]);
   const addCustomer = async e => {
     e.preventDefault();
     const res = await fetch('/api/submissions', {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
         first_name: e.target.first_name.value,
         last_name: e.target.last_name.value,
@@ -19,7 +24,18 @@ export default function Home() {
       console.error(json.errors)
       throw new Error('Failed to fetch API');
     }
+    switch (json.status) {
+      case 'unavailable':
+        setFormResMessage([json.message]);
+        break;
+      case 'error':
+        setFormResMessage([json.message]);
+        break;
+      default:
+        setFormResMessage([json.message]);
+    }
   }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -36,20 +52,21 @@ export default function Home() {
           Get started by editing{' '}
           <code className={styles.code}>pages/index.js</code>
         </p>
-        
         <div>
           <form onSubmit={addCustomer} method="POST">
             <label htmlFor="first_name">First Name:</label>
-            <input type="text" name="first_name" required /><br/>
+            <input id="first_name" type="text" name="first_name" required /><br/>
             <label htmlFor="last_name">Last Name:</label>
-            <input type="text" name="last_name" required /><br/>
+            <input id="last_name" type="text" name="last_name" required /><br/>
             <label htmlFor="email">Email:</label>
-            <input type="email" name="email" required /><br/>
+            <input id="email" type="email" name="email" required /><br/>
             <label htmlFor="phone">Phone:</label>
-            <input type="tel" name="phone" required /><br/>
+            <input id="phone" type="tel" name="phone" required /><br/>
             <label htmlFor="zip">Zip:</label>
-            <input type="text" name="zip" required pattern="\d{5}"/><br/>
+            <input id="zip" type="text" name="zip" required pattern="\d{5}"/><br/>
             <button type="submit">Submit</button>
+            {formResMessage.map(i => {return <div>{i}</div>})
+          }
           </form>
         </div>
       </main>
