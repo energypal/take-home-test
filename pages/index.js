@@ -9,6 +9,15 @@ export default function Home() {
   const [ email, setEmail ] = useState('');
   const [ phone, setPhone ] = useState('');
   const [ zip, setZip ] = useState('');
+  const [ firstNameError, setFirstNameError ] = useState('');
+  const [ lastNameError, setLastNameError ] = useState('');
+  const [ emailError, setEmailError ] = useState('');
+  const [ phoneError, setPhoneError ] = useState('');
+  const [ zipError, setZipError ] = useState('');
+  
+  const inputValidStyle = 'focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none';
+  const inputErrorStyle = 'bg-red-200 focus:ring-2 focus:ring-red-500 focus:border-transparent focus:outline-none';
+
   const addCustomer = async e => {
     e.preventDefault();
     const res = await fetch('/api/submissions', {
@@ -36,14 +45,55 @@ export default function Home() {
     setPhone('');
     setZip('');
   }
-
+  useEffect(() => {
+    if (firstName.length < 1 ) {
+      setFirstNameError('You must provide a first name');
+    } else {
+      setFirstNameError('');
+    }
+  },[firstName]);
+  useEffect(() => {
+    if (lastName.length < 1 ) {
+      setLastNameError('You must provide a last name');
+    } else {
+      setLastNameError('');
+    }
+  }, [lastName]);
+  useEffect(() => {
+    if (email.length < 1 ) {
+      setEmailError('You must provide a valid email');
+    } else {
+      setEmailError('');
+    }
+  }, [email])
+  useEffect(() => {
+    if (phone.length < 1 ) {
+      setPhoneError('You must provide a valid phone number');
+    } else {
+      setPhoneError('');
+    }
+  }, [phone])
+  useEffect(() => {
+    if (zip.length < 1 ) {
+      setZipError('You must provide a valid zip code');
+    } else {
+      setZipError('');
+    }
+  }, [zip])
+  useEffect(() => {
+    setFirstNameError('');
+    setLastNameError('');
+    setEmailError('');
+    setPhoneError('');
+    setZipError('');
+  }, [])
   return (
     <div >
       <Head>
         <title>EnergyPal Take-Home Test</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="w-screen h-screen flex items-center justify-center bg-gray-50">
+      <main className={"w-screen h-screen flex items-center justify-center bg-gray-50"}>
         <div className="w-screen mx-4 sm:w-10/12 md:w-6/12 lg:w-96 md:border md:rounded-xl md:p-5 md:bg-white">
         <h1 className="text-3xl font-semibold text-gray-800 mb-8">
           Welcome to <a className="text-blue-500" href="https://energypal.com">EnergyPal!</a>
@@ -51,23 +101,28 @@ export default function Home() {
           <form className="grid grid-cols-1 gap-3" onSubmit={addCustomer} method="POST">
             <label htmlFor="first_name">
               <span className="text-xs font-medium text-gray-700" >First Name</span>
-              <input onChange={e => {setFirstName(e.target.value)}} value={firstName} className="border rounded text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none w-full p-2" id="first_name" type="text" name="first_name" required placeholder="Your first name"/><br/>
+              <input onChange={e => {setFirstName(e.target.value)}} value={firstName} className={`border rounded text-gray-700 placeholder-gray-400 w-full p-2 ${firstNameError === '' ? inputValidStyle : inputErrorStyle}` } id="first_name" type="text" name="first_name" required placeholder="Your first name"/><br/>
+              <div className="text-xs font-medium text-red-500 h-2 pt-1">{firstNameError}</div>
             </label>
             <label htmlFor="last_name">
               <span className="text-xs font-medium text-gray-700" >Last Name</span>
-              <input onChange={e => {setLastName(e.target.value)}} value={lastName} className="border rounded text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none w-full p-2"  id="last_name" type="text" name="last_name" required placeholder="Your last name"/><br/>
+              <input onChange={e => {setLastName(e.target.value)}} value={lastName} className={`border rounded text-gray-700 placeholder-gray-400 w-full p-2 ${lastNameError === '' ? inputValidStyle : inputErrorStyle}` }   id="last_name" type="text" name="last_name" required placeholder="Your last name"/><br/>
+              <div className="text-xs font-medium text-red-500 h-2 pt-1">{lastNameError}</div>
             </label>
             <label htmlFor="email">
               <span className="text-xs font-medium text-gray-700" >Email</span>
-              <input onChange={e => {setEmail(e.target.value)}} value={email} className="border rounded text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none w-full p-2"  id="email" type="email" name="email" required placeholder="Ex. billgates@microsoft.com"/><br/>
+              <input onChange={e => {setEmail(e.target.value)}} value={email} className={`border rounded text-gray-700 placeholder-gray-400 w-full p-2 ${emailError === '' ? inputValidStyle  : inputErrorStyle}` }  id="email" type="email" name="email" required placeholder="Ex. billgates@microsoft.com"/><br/>
+              <div className="text-xs font-medium text-red-500 h-2 pt-1">{emailError}</div>
             </label>
             <label htmlFor="phone">
               <span className="text-xs font-medium text-gray-700" >Phone</span>
-              <input onChange={e => {setPhone(e.target.value)}} value={phone} className="border rounded text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none w-full p-2"  id="phone" type="tel" name="phone" required placeholder="Your phone number"/><br/>
+              <input onChange={e => {setPhone(e.target.value)}} value={phone} className={`border rounded text-gray-700 placeholder-gray-400 w-full p-2 ${phoneError === '' ? inputValidStyle : inputErrorStyle}` }   id="phone" type="tel" name="phone" required placeholder="Your phone number"/><br/>
+              <div className="text-xs font-medium text-red-500 h-2 pt-1">{phoneError}</div>
             </label>
             <label htmlFor="zip">
               <span className="text-xs font-medium text-gray-700" >Zip</span>
-              <input onChange={e => {setZip(e.target.value)}} value={zip} className="border rounded text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none w-full p-2"  id="zip" type="text" name="zip" required pattern="\d{5}" placeholder="90210"/><br/>
+              <input onChange={e => {setZip(e.target.value)}} value={zip} className={`border rounded text-gray-700 placeholder-gray-400 w-full p-2 ${zipError === '' ? inputValidStyle : inputErrorStyle}` }   id="zip" type="text" name="zip" required pattern="\d{5}" placeholder="90210"/><br/>
+              <div className="text-xs font-medium text-red-500 h-2 pt-1">{zipError}</div>
             </label>
             <div className="flex justify-end mt-4">
               <button className="bg-blue-500 hover:bg-blue-700 rounded text-white w-full md:w-auto py-2 md:px-6 shadow-md" type="submit">Submit</button>
