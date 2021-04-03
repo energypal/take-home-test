@@ -114,12 +114,12 @@ export default function Home() {
           <form className="grid grid-cols-1 gap-3" onSubmit={addCustomer} method="POST">
             <label htmlFor="first_name">
               <span className="text-xs font-medium text-gray-700" >First Name</span>
-              <input onChange={e => {setFirstName(e.target.value)}} value={firstName} className={`border rounded text-gray-700 placeholder-gray-400 w-full p-2 ${firstNameError === '' ? inputValidStyle : inputErrorStyle}` } id="first_name" type="text" name="first_name" required placeholder="Your first name"/><br/>
+              <input onChange={e => {setFirstName(e.target.value)}} value={firstName} className={`border rounded text-gray-700 placeholder-gray-400 w-full p-2 ${firstNameError === '' ? inputValidStyle : inputErrorStyle}` } id="first_name" type="text" name="first_name" required /><br/>
               <div className="text-xs font-medium text-red-500 h-2 pt-1">{firstNameError}</div>
             </label>
             <label htmlFor="last_name">
               <span className="text-xs font-medium text-gray-700" >Last Name</span>
-              <input onChange={e => {setLastName(e.target.value)}} value={lastName} className={`border rounded text-gray-700 placeholder-gray-400 w-full p-2 ${lastNameError === '' ? inputValidStyle : inputErrorStyle}` }   id="last_name" type="text" name="last_name" required placeholder="Your last name"/><br/>
+              <input onChange={e => {setLastName(e.target.value)}} value={lastName} className={`border rounded text-gray-700 placeholder-gray-400 w-full p-2 ${lastNameError === '' ? inputValidStyle : inputErrorStyle}` }   id="last_name" type="text" name="last_name" required /><br/>
               <div className="text-xs font-medium text-red-500 h-2 pt-1">{lastNameError}</div>
             </label>
             <label htmlFor="email">
@@ -129,7 +129,7 @@ export default function Home() {
             </label>
             <label htmlFor="phone">
               <span className="text-xs font-medium text-gray-700" >Phone</span>
-              <input onChange={e => {setPhone(e.target.value)}} value={phone} className={`border rounded text-gray-700 placeholder-gray-400 w-full p-2 ${phoneError === '' ? inputValidStyle : inputErrorStyle}` }   id="phone" type="tel" name="phone" required placeholder="Your phone number"/><br/>
+              <input onChange={e => {setPhone(e.target.value)}} value={phone} className={`border rounded text-gray-700 placeholder-gray-400 w-full p-2 ${phoneError === '' ? inputValidStyle : inputErrorStyle}` }   id="phone" type="tel" name="phone" pattern="^^[(]?[0-9]{3}[)]?[ ,-]?[0-9]{3}[ ,-]?[0-9]{4}$" required placeholder="Your phone number"/><br/>
               <div className="text-xs font-medium text-red-500 h-2 pt-1">{phoneError}</div>
             </label>
             <label htmlFor="zip">
