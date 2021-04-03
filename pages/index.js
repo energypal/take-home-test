@@ -1,5 +1,4 @@
 import Head from 'next/head'
-// import styles from '../styles/Home.module.css'
 import React, { useState, useEffect } from 'react'
 
 export default function Home() {
@@ -44,6 +43,11 @@ export default function Home() {
     setEmail('');
     setPhone('');
     setZip('');
+    setFirstNameError('');
+    setLastNameError('');
+    setEmailError('');
+    setPhoneError('');
+    setZipError('');
   }
   useEffect(() => {
     if (firstName.length < 1 ) {
@@ -59,22 +63,31 @@ export default function Home() {
       setLastNameError('');
     }
   }, [lastName]);
+  const validateEmail = email => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+  }
   useEffect(() => {
-    if (email.length < 1 ) {
+    if (!validateEmail(email) ) {
       setEmailError('You must provide a valid email');
     } else {
       setEmailError('');
     }
   }, [email])
+  const validatePhone = phone => {
+    return /^[(]?[0-9]{3}[)]?[ ,-]?[0-9]{3}[ ,-]?[0-9]{4}$/.test(phone)
+  }
   useEffect(() => {
-    if (phone.length < 1 ) {
-      setPhoneError('You must provide a valid phone number');
+    if (!validatePhone(phone) ) {
+      setPhoneError('You must provide a valid North American phone number');
     } else {
       setPhoneError('');
     }
   }, [phone])
+  const validateZip = zip => {
+    return /^\d{5}$/.test(zip)
+  }
   useEffect(() => {
-    if (zip.length < 1 ) {
+    if (!validateZip(zip)) {
       setZipError('You must provide a valid zip code');
     } else {
       setZipError('');
@@ -93,7 +106,7 @@ export default function Home() {
         <title>EnergyPal Take-Home Test</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={"w-screen h-screen flex items-center justify-center bg-gray-50"}>
+      <main className="w-screen h-screen flex items-center justify-center bg-gray-50">
         <div className="w-screen mx-4 sm:w-10/12 md:w-6/12 lg:w-96 md:border md:rounded-xl md:p-5 md:bg-white">
         <h1 className="text-3xl font-semibold text-gray-800 mb-8">
           Welcome to <a className="text-blue-500" href="https://energypal.com">EnergyPal!</a>
@@ -121,7 +134,7 @@ export default function Home() {
             </label>
             <label htmlFor="zip">
               <span className="text-xs font-medium text-gray-700" >Zip</span>
-              <input onChange={e => {setZip(e.target.value)}} value={zip} className={`border rounded text-gray-700 placeholder-gray-400 w-full p-2 ${zipError === '' ? inputValidStyle : inputErrorStyle}` }   id="zip" type="text" name="zip" required pattern="\d{5}" placeholder="90210"/><br/>
+              <input onChange={e => {setZip(e.target.value)}} value={zip} className={`border rounded text-gray-700 placeholder-gray-400 w-full p-2 ${zipError === '' ? inputValidStyle : inputErrorStyle}` }   id="zip" type="text" name="zip" required pattern="^\d{5}$" placeholder="90210"/><br/>
               <div className="text-xs font-medium text-red-500 h-2 pt-1">{zipError}</div>
             </label>
             <div className="flex justify-end mt-4">
