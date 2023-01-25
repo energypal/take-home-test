@@ -22,7 +22,7 @@ When you are finished, submit your work as a `pull request` back to this reposit
 ### Requirements
 
 1. Update a web form found at `pages/index.js` according to best practices with fields for first name, last name, email, phone and US zip code (5 numeric digits).
-2. Style the web page & form to look like `design.png` (feel free to borrow styles found at [1](https://energypal.com/#start), [2](https://energypal.com/company-brand-assets)).
+2. Style the web page & form to look like `design.png` (feel free to borrow styles found at [1](https://energypal.com/), [2](https://energypal.com/company-brand-assets)).
 3. Add validation to the form to prevent invalid values from being submitted.
 4. Submit the form submissions via HTTP POST to `/api/submissions`.
 5. Let the user know if the form was submitted successfully or not.
@@ -33,8 +33,6 @@ To run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
