@@ -50,8 +50,8 @@ export default function Home() {
         <title>EnergyPal Take-Home Test</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <div className='grid lg:grid-cols-2 gap-12'>
+      <main className={`${styles.main} sm:px-24`}>
+        <div className='grid lg:grid-cols-2 lg:gap-x-20'>
           <div>
             <div>
               <h1 className={styles.title}>

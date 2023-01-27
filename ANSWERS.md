@@ -12,6 +12,6 @@
 + No real limitations, did some basic responsive test for design, but overall should work on most modern browsers as the library imported use polyfill for browser support
 
 - Additional Notes:
-+ I've added the features of allowing Canada Postal Codes and most formats of phones using inbuilt form requirements.
++ I've added the features of allowing Canada Postal Codes and most formats of phones using inbuilt form requirements and better responsive design.
 
 
