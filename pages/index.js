@@ -3,6 +3,13 @@ import styles from '../styles/Home.module.css'
 
 
 export default function Home() {
+
+  // const [firstName, setFirstName] = React.useState('');
+  // const [lastName, setLastName] = React.useState('');
+  // const [email, setEmail] = React.useState('');
+  // const [phone, setPhone] = React.useState('');
+  // const [postalCode, setPostalCode] = React.useState('');
+
   return (
     <div className={styles.container}>
       <Head>
@@ -29,24 +36,24 @@ export default function Home() {
                 <div className='grid md:grid-cols-2 gap-y-6 gap-x-12'>
                   <div className='grid grid-cols-1'>
                     <label for="fname">First Name</label>
-                    <input id="fname" type="text" name="first_name" className='rounded-3xl px-3 py-2 border border-black/20 outline-blue-700' />
+                    <input id="fname" type="text" name="first_name" className='rounded-3xl px-3 py-2 border border-black/20 outline-blue-700' required />
                   </div>
                   <div className='grid grid-cols-1'>
                     <label for="lname">Last Name</label>
-                    <input id="lname" type="text" name="last_name" className='rounded-3xl px-3 py-2 border border-black/20 outline-blue-700' />
+                    <input id="lname" type="text" name="last_name" className='rounded-3xl px-3 py-2 border border-black/20 outline-blue-700' required />
                   </div>
                   <div className='grid grid-cols-1'>
                     <label for="email">Email Address</label>
-                    <input id="email" type="email" name="email" className='rounded-3xl px-3 py-2 border border-black/20 outline-blue-700' />
+                    <input id="email" type="email" name="email" className='rounded-3xl px-3 py-2 border border-black/20 outline-blue-700' required />
                   </div>
                   <div className='grid grid-cols-1'>
                     <label for="phone">Phone Number</label>
-                    <input id="phone" type="tel" name="phone" className='rounded-3xl px-3 py-2 border border-black/20 outline-blue-700' />
+                    <input id="phone" type="tel" name="phone" className='rounded-3xl px-3 py-2 border border-black/20 outline-blue-700' title="Phone number should be at least 10 digits long, formatting is optional." pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$" required />
                   </div>
                 </div>
                 <div className='grid grid-cols-1'>
                   <label for="zip">Postal Code</label>
-                  <input id="zip" type="text" name="zip" className='rounded-3xl px-3 py-2 border border-black/20 outline-blue-700' />
+                  <input id="zip" type="text" name="zip" className='rounded-3xl px-3 py-2 border border-black/20 outline-blue-700' title="Postal code should be 5 digit US ZIP code or 6 digit alphanumerical Canadian Postal Code." pattern="^\d{5}-\d{4}|\d{5}|[A-Z]\d[A-Z]\s?\d[A-Z]\d$" required />
                 </div>
               </div>
               <div className='py-12 flex justify-center'>
