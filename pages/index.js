@@ -1,11 +1,9 @@
 import Head from 'next/head'
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
-  const router = useRouter();
   const buttonText = ['Server Error, Try Again!', 'Submit', 'Submitting...', 'Form Submitted Successfully!'];
   const buttonColor = ['bg-red-700', 'bg-blue-700', 'bg-gray-700', 'bg-green-700']
 
