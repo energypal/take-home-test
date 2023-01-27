@@ -1,14 +1,50 @@
 import Head from 'next/head'
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+
 import styles from '../styles/Home.module.css'
 
-
 export default function Home() {
+  const router = useRouter();
+  const buttonText = ['Server Error, Try Again!', 'Submit', 'Submitting...', 'Form Submitted Successfully!'];
+  const buttonColor = ['bg-red-700', 'bg-blue-700', 'bg-gray-700', 'bg-green-700']
 
-  // const [firstName, setFirstName] = React.useState('');
-  // const [lastName, setLastName] = React.useState('');
-  // const [email, setEmail] = React.useState('');
-  // const [phone, setPhone] = React.useState('');
-  // const [postalCode, setPostalCode] = React.useState('');
+  const WAIT = Math.random() * 1000 + 200; //Added to not be as jarring for calling an instantaneous api
+
+  const [formStatus, setFormStatus] = useState(0); //-1 Failure, 0 Initial, 1 Submitting, 2 Success
+  const [formTextStatus, setFormTextStatus] = useState(buttonText[1]);
+
+  const handleSubmit = (event) => {
+    updateForm(1);
+    const formData = new FormData(event.currentTarget);
+    event.preventDefault();
+    let data = {};
+    for (let [key, value] of formData.entries()) {
+      data = { ...data, [key]: value }
+    }
+
+    //Useless Wait Function just for Aesthetic Purposes
+    setTimeout(async function () {
+      await fetch('/api/submissions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
+      }).then((res) => {
+        if (res.ok) {
+          updateForm(2);
+        } else {
+          updateForm(-1);
+        }
+      })
+    }, WAIT);
+  }
+
+  const updateForm = (state) => {
+    setFormStatus(state);
+    setFormTextStatus(buttonText[state + 1]);
+  }
 
   return (
     <div className={styles.container}>
@@ -31,45 +67,45 @@ export default function Home() {
             </div>
           </div>
           <div className={styles.form}>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className='grid grid-cols-1 gap-y-6'>
                 <div className='grid md:grid-cols-2 gap-y-6 gap-x-12'>
                   <div className='grid grid-cols-1'>
-                    <label for="fname">First Name</label>
-                    <input id="fname" type="text" name="first_name" className='rounded-3xl px-3 py-2 border border-black/20 outline-blue-700' required />
+                    <label htmlFor="fname">First Name</label>
+                    <input id="fname" type="text" name="first_name" className='rounded-3xl px-3 py-2 border border-black/20 outline-blue-700' disabled={formStatus == 1} required />
                   </div>
                   <div className='grid grid-cols-1'>
-                    <label for="lname">Last Name</label>
-                    <input id="lname" type="text" name="last_name" className='rounded-3xl px-3 py-2 border border-black/20 outline-blue-700' required />
+                    <label htmlFor="lname">Last Name</label>
+                    <input id="lname" type="text" name="last_name" className='rounded-3xl px-3 py-2 border border-black/20 outline-blue-700' disabled={formStatus == 1} required />
                   </div>
                   <div className='grid grid-cols-1'>
-                    <label for="email">Email Address</label>
-                    <input id="email" type="email" name="email" className='rounded-3xl px-3 py-2 border border-black/20 outline-blue-700' required />
+                    <label htmlFor="email">Email Address</label>
+                    <input id="email" type="email" name="email" className='rounded-3xl px-3 py-2 border border-black/20 outline-blue-700' disabled={formStatus == 1} required />
                   </div>
                   <div className='grid grid-cols-1'>
-                    <label for="phone">Phone Number</label>
-                    <input id="phone" type="tel" name="phone" className='rounded-3xl px-3 py-2 border border-black/20 outline-blue-700' title="Phone number should be at least 10 digits long, formatting is optional." pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$" required />
+                    <label htmlFor="phone">Phone Number</label>
+                    <input id="phone" type="tel" name="phone" className='rounded-3xl px-3 py-2 border border-black/20 outline-blue-700' disabled={formStatus == 1} title="Phone number should be at least 10 digits long, formatting is optional." pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$" required />
                   </div>
                 </div>
                 <div className='grid grid-cols-1'>
-                  <label for="zip">Postal Code</label>
-                  <input id="zip" type="text" name="zip" className='rounded-3xl px-3 py-2 border border-black/20 outline-blue-700' title="Postal code should be 5 digit US ZIP code or 6 digit alphanumerical Canadian Postal Code." pattern="^\d{5}-\d{4}|\d{5}|[A-Z]\d[A-Z]\s?\d[A-Z]\d$" required />
+                  <label htmlFor="zip">Postal Code</label>
+                  <input id="zip" type="text" name="zip" className='rounded-3xl px-3 py-2 border border-black/20 outline-blue-700' disabled={formStatus == 1} title="Postal code should be 5 digit US ZIP code or 6 digit alphanumerical Canadian Postal Code." pattern="^\d{5}-\d{4}|\d{5}|[A-Z]\d[A-Z]\s?\d[A-Z]\d$" required />
                 </div>
               </div>
               <div className='py-12 flex justify-center'>
-                <button className='rounded-full bg-blue-700 py-3 px-32 text-white text-xl font-semibold' type="submit">Submit</button>
+                <button className={`rounded-full py-3 px-32 text-white text-xl font-semibold ${buttonColor[formStatus + 1]}`} type="submit" disabled={formStatus == 1}>{formTextStatus}</button>
               </div>
               <div>
                 <p className='text-sm'>Thanks for your interest in EnergyPal! By clicking above, you agree we may call and text you about EnergyPal products at the number provided even if on a "do not call" list, using pre-recorded messages or autodialing. Msg and data rates may apply. Your consent is optional, opt-out anytime.</p>
               </div>
             </form>
           </div>
-        </div>
-      </main>
+        </div >
+      </main >
       <footer>
         <p className='text-sm pb-2'>&copy; Copyright {new Date().getFullYear()} EnergyPal.com, All Rights Reserved. <a href="">Privacy Policy.</a> <a href="">Terms of Service.</a></p>
       </footer>
-    </div>
+    </div >
   )
 }
 
