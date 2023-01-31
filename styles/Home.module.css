@@ -8,7 +8,10 @@
 }
 
 .main {
+<<<<<<< HEAD
   padding: 5rem 0;
+=======
+>>>>>>> energypal/master
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -35,7 +38,11 @@
 
 .title,
 .description {
+<<<<<<< HEAD
   text-align: center;
+=======
+  text-align: left;
+>>>>>>> energypal/master
 }
 
 .description {
@@ -52,3 +59,15 @@
     Bitstream Vera Sans Mono, Courier New, monospace;
 }
 
+<<<<<<< HEAD
+=======
+.form {
+  color: #888888;
+}
+
+.form label {
+  padding-bottom: 0.5rem;
+  font-size: 1.1rem;
+  color: #888888;
+}
+>>>>>>> energypal/master
