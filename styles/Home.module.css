@@ -1,54 +1,128 @@
 .container {
-  min-height: 100vh;
-  padding: 0 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
+  padding: 0.5rem 1rem;
+  background-color: rgb(243 244 246);
 }
 
 .main {
-  padding: 5rem 0;
-  flex: 1;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
-  align-items: center;
-}
-
-.title a {
-  color: #0070f3;
-  text-decoration: none;
-}
-
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
+  gap: 3rem;
+  margin-block: auto;
 }
 
 .title {
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: rgb(34 37 41);
   margin: 0;
-  line-height: 1.15;
-  font-size: 4rem;
 }
 
-.title,
-.description {
+.subtitle {
+  font-size: 1.3rem;
+  line-height: 1.4;
+  color: rgb(74 76 79);
+  margin: 0.5rem 0 0;
+}
+
+.textContainer {
+  max-width: 550px;
+}
+
+.row {
+  display: flex;
+  gap: 2rem;
+}
+
+.row + .row {
+  margin-top: 1rem;
+}
+
+.formElement {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.7rem;
+}
+
+.formElement label {
+  color: rgb(130 136 143);
+}
+
+.formElement input {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  background-color: white;
+  padding: 0.3rem 0.8rem;
+  border: none;
+  border-radius: 10rem;
+  outline: 1px solid rgb(209 213 219);
+  appearance: none;
+  transition: outline 0.05s ease;
+}
+
+.formElement input:focus {
+  outline: 2px solid rgb(40, 84, 197);
+}
+
+.formContainer {
+  max-width: 570px;
+}
+
+.formContainer button {
+  display: block;
+  width: 14rem;
+  font-size: 1.1rem;
+  line-height: 1.5rem;
+  color: white;
+  background-color: rgb(40, 84, 197);
+  padding: 0.5rem 0.8rem;
+  margin-top: 2rem;
+  margin-inline: auto;
+  border: none;
+  border-radius: 10rem;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+}
+
+.formContainer button:hover {
+  background-color: rgb(40, 84, 197, 0.8);
+}
+
+.legalText {
+  font-size: 0.8rem;
+  line-height: 1.2rem;
+  color: rgb(126 131 137);
+  margin-top: 2rem;
+}
+
+.footer p {
+  font-size: 0.8rem;
+  line-height: 1.2rem;
+  color: rgb(126 131 137);
+  margin: 0.5rem;
   text-align: center;
 }
 
-.description {
-  line-height: 1.5;
-  font-size: 1.5rem;
+@media screen and (max-width: 1200px) {
+  .main {
+    flex-direction: column;
+  }
 }
 
-.code {
-  background: #fafafa;
-  border-radius: 5px;
-  padding: 0.75rem;
-  font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
+@media screen and (max-width: 600px) {
+  .main {
+    margin-block: 5rem;
+  }
+  .row {
+    flex-direction: column;
+    gap: 1rem;
+  }
 }
-
