@@ -111,6 +111,15 @@
   text-align: center;
 }
 
+.inputError {
+  color: red;
+  font-size: 0.7rem;
+  line-height: 1rem;
+  margin: 0rem;
+  margin-block: -0.7rem -1rem;
+  margin-left: auto;
+}
+
 @media screen and (max-width: 1200px) {
   .main {
     flex-direction: column;

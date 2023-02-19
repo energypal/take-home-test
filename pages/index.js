@@ -1,7 +1,30 @@
 import Head from 'next/head'
+import { useForm } from 'react-hook-form'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
+
+  const onSubmit = async (data) => {
+    try {
+      const result = await fetch('/api/submissions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+      const json = await result.json()
+      console.log(json)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -18,31 +41,82 @@ export default function Home() {
           </p>
         </div>
         <div className={styles.formContainer}>
-          <form>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className={styles.row}>
               <div className={styles.formElement}>
-                <label for="first_name">First Name</label>
-                <input type="text" id="first_name" name="first_name" />
+                <label htmlFor="first_name">First Name</label>
+                <input
+                  type="text"
+                  id="first_name"
+                  name="first_name"
+                  {...register('first_name', { required: true })}
+                />
+                {errors.first_name?.type === 'required' && (
+                  <p className={styles.inputError}>
+                    First Name field is required
+                  </p>
+                )}
               </div>
               <div className={styles.formElement}>
-                <label for="last_name">Last Name</label>
-                <input type="text" id="last_name" name="last_name" />
+                <label htmlFor="last_name">Last Name</label>
+                <input
+                  type="text"
+                  id="last_name"
+                  name="last_name"
+                  {...register('last_name', { required: true })}
+                />
+                {errors.last_name?.type === 'required' && (
+                  <p className={styles.inputError}>
+                    Last Name field is required
+                  </p>
+                )}
               </div>
             </div>
             <div className={styles.row}>
               <div className={styles.formElement}>
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" />
+                <label htmlFor="email">Email Address</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  {...register('email', { required: true })}
+                />
+                {errors.email?.type === 'required' && (
+                  <p className={styles.inputError}>Email field is required</p>
+                )}
               </div>
               <div className={styles.formElement}>
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" />
+                <label htmlFor="phone">Phone Number</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  {...register('phone', { required: true })}
+                />
+                {errors.phone?.type === 'required' && (
+                  <p className={styles.inputError}>
+                    Phone Number field is required
+                  </p>
+                )}
               </div>
             </div>
             <div className={styles.row}>
               <div className={styles.formElement}>
-                <label for="zip">Postal Code</label>
-                <input type="text" id="zip" name="zip" />
+                <label htmlFor="zip">Postal Code</label>
+                <input
+                  type="text"
+                  id="zip"
+                  name="zip"
+                  {...register('zip', { required: true, pattern: /^\d{5}$/ })}
+                />
+                {errors.zip?.type === 'required' && (
+                  <p className={styles.inputError}>
+                    Postal Code field is required
+                  </p>
+                )}
+                {errors.zip?.type === 'pattern' && (
+                  <p className={styles.inputError}>Postal Code is invalid</p>
+                )}
               </div>
             </div>
             <button type="submit">Submit</button>
@@ -56,6 +130,7 @@ export default function Home() {
           </form>
         </div>
       </main>
+
       <footer className={styles.footer}>
         <p>
           © Copyright 2021 EnergyPal.com, All Rights Reserved. Privacy Policy.
