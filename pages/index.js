@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import styles from '../styles/Home.module.css'
 
@@ -8,6 +9,7 @@ export default function Home() {
     handleSubmit,
     formState: { errors },
   } = useForm()
+  const [formStatus, setFormStatus] = useState()
 
   const onSubmit = async (data) => {
     try {
@@ -19,9 +21,12 @@ export default function Home() {
         body: JSON.stringify(data),
       })
       const json = await result.json()
-      console.log(json)
+      setFormStatus(json)
     } catch (error) {
-      console.error(error)
+      setFormStatus({
+        message: 'Something went wrong. Please try again later.',
+        status: 'unavailable',
+      })
     }
   }
 
@@ -120,6 +125,7 @@ export default function Home() {
               </div>
             </div>
             <button type="submit">Submit</button>
+            {formStatus?.status && <p className={formStatus.status === 'success' ? styles.statusSuccess : styles.statusError}>{formStatus.message}</p>}
             <p className={styles.legalText}>
               Thanks for your interest in EnergyPal! By clicking above, you
               agree we may call and text you about EnergyPal products at the

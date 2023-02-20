@@ -115,9 +115,25 @@
   color: red;
   font-size: 0.7rem;
   line-height: 1rem;
-  margin: 0rem;
   margin-block: -0.7rem -1rem;
   margin-left: auto;
+}
+
+.statusSuccess,
+.statusError {
+  font-size: 0.8rem;
+  line-height: 1.2rem;
+  font-weight: 600;
+  margin-block: 0.2rem -1.4rem;
+  text-align: center;
+}
+
+.statusSuccess {
+  color: rgb(28, 134, 62);
+}
+
+.statusError {
+  color: red;
 }
 
 @media screen and (max-width: 1200px) {
