@@ -1,17 +1,19 @@
 # Take-Home Test (Web Developer)
 
 ## Overview
-This is the take-home test for the Web Developer position role at EnergyPal.
+
+This is the take-home test for the Web Developer position at EnergyPal.
 
 The test consists of two parts:
+
 1. [A coding test](#coding-test)
 2. [A few technical questions](#technical-questions)
 
 ### Coding Test
 
-The objective is to create a fully-functioning landing page with a web form to collect customer interest in solar quotes. 
+The objective is to create a fully-functioning landing page with a web form to collect customer interest in solar quotes.
 
-Feel free to solve the problems howver you see fit, using any publicly available libraries you think are appropriate.
+Feel free to solve the problems however you see fit, using any publicly available libraries you think are appropriate.
 
 To get started, fork this repository, clone it locally, and work through the [requirements](#requirements) (see below).
 
