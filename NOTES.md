@@ -31,3 +31,4 @@ Day 3
 # Improvement Ideas
 
 - Input placeholders to show examples / structure
+- Dark mode
