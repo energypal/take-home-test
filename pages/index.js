@@ -1,41 +1,56 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <>
       <Head>
         <title>EnergyPal Take-Home Test</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <div>
+        <header>
+          <h2>Get Started</h2>
+          <p>
+            Speak to an EnergyPal advisor about our current deals on solar
+            panels and home batteries.
+          </p>
+        </header>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://energypal.com">EnergyPal!</a>
-        </h1>
+        <form>
+          <label htmlFor="firstName">First Name</label>
+          <input type="text" id="firstName" name="first_name" />
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-        
-        <div>
-          <form>
-            First Name: <input type="text" name="first_name" /><br/>
-            
-            Last Name: <input type="text" name="last_name" /><br/>
-            
-            Email: <input type="email" name="email" /><br/>
+          <label htmlFor="lastName">Last Name</label>
+          <input type="text" id="lastName" name="last_name" />
 
-            Phone: <input type="tel" name="phone" /><br/>
+          <label htmlFor="email">Email Address</label>
+          <input type="email" id="email" name="email" />
 
-            Zip: <input type="text" name="zip" /><br/>
+          <label htmlFor="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" />
 
-            <button type="submit">Submit</button>
-          </form>
-        </div>
+          <label htmlFor="postalCode">Postal Code</label>
+          <input type="text" id="postalCode" name="zip" />
 
-      </main>
-    </div>
-  )
+          <button type="submit">Submit</button>
+
+          <p>
+            Thanks for your interest in EnergyPal! By clicking above, you agree
+            we may call and text you about EnergyPal products at the number
+            provided even if on a "do not call" list, using pre-recorded
+            messages or autodialing. Msg and data rates may apply. Your consent
+            is optional, opt out anytime.
+          </p>
+        </form>
+
+        <footer>
+          <p>
+            © 2023 EnergyPal. All rights reserved. Privacy Policy. Terms of
+            Service.
+          </p>
+        </footer>
+      </div>
+    </>
+  );
 }

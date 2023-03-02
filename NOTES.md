@@ -1,6 +1,6 @@
 # Tasks
 
-### [ ] Build page structure
+### [x] Build page structure
 
 ### [ ] Style and make responsive
 
@@ -22,5 +22,12 @@ Day 2
 
 - Learning about Next.js: 1h
 - Initial set up: 0.5h
+- Building html structure: 0.5h
 
 Day 3
+
+  <br>
+
+# Improvement Ideas
+
+- Field placeholder examples
