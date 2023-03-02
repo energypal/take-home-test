@@ -8,7 +8,7 @@ export default function Home() {
         <title>EnergyPal Take-Home Test</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
+      <section>
         <header>
           <h2>Get Started</h2>
           <p>
@@ -50,7 +50,7 @@ export default function Home() {
             Service.
           </p>
         </footer>
-      </div>
+      </section>
     </>
   );
 }
