@@ -4,15 +4,15 @@
 
 ### [ ] Style and make responsive
 
-### [ ] Add form validation
-
 ### [ ] Handle form submission and display result
+
+### [ ] Add form validation
 
 <br>
 
 # Timekeeping
 
-## Total hours:
+## Total hours: 4 (3h of Next.js research)
 
 Day 1
 
@@ -30,4 +30,4 @@ Day 3
 
 # Improvement Ideas
 
-- Field placeholder examples
+- Input placeholders to show examples / structure
