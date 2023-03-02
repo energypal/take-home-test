@@ -12,7 +12,7 @@
 
 # Timekeeping
 
-## Total hours: 4 (3h of Next.js research)
+## Total hours: 4.5 (3h of Next.js research)
 
 Day 1
 
@@ -23,6 +23,7 @@ Day 2
 - Learning about Next.js: 1h
 - Initial set up: 0.5h
 - Building html structure: 0.5h
+- Install Tailwind CSS: 0.5h
 
 Day 3
 
