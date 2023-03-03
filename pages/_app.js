@@ -9,9 +9,9 @@ const roboto = Roboto({
 
 function MyApp({ Component, pageProps }) {
   return (
-    <main className={`${roboto.variable} font-sans`}>
+    <div className={`${roboto.variable} font-sans`}>
       <Component {...pageProps} />
-    </main>
+    </div>
   );
 }
 
