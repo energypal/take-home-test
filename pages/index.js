@@ -8,15 +8,15 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <section className="font-sans pt-20 pr-8 pl-8 md:pt-36 md:pr-28 md:pl-28 flex flex-col md:flex-row ">
-        <header className="">
+        <header className="flex-1 md:mr-2">
           <h2 className="text-5xl">Get Started</h2>
-          <p>
+          <p className="text-2xl mt-4">
             Speak to an EnergyPal advisor about our current deals on solar
             panels and home batteries.
           </p>
         </header>
 
-        <form>
+        <form className="flex-1 md:ml-2">
           <label htmlFor="firstName">First Name</label>
           <input type="text" id="firstName" name="first_name" />
 
