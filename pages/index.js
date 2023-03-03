@@ -7,6 +7,7 @@ export default function Home() {
         <title>EnergyPal Take-Home Test</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <section className="font-sans pt-16 pr-8 pl-8 md:pt-40 md:pr-32 md:pl-32 flex flex-col md:flex-row max-w-[1680px] min-w-[323px] mx-auto">
         <header className="flex-1 md:mr-4">
           <h2 className="text-5xl">Get Started</h2>
@@ -90,10 +91,12 @@ export default function Home() {
           </p>
         </form>
       </section>
+
       <footer className="px-4">
         <p className="text-center text-mediumGray">
-          © 2023 EnergyPal. All rights reserved. <a href="">Privacy Policy.</a>
-          <a href="">Terms of Service.</a>
+          © 2023 EnergyPal. All rights reserved.{" "}
+          <a href="https://energypal.com/privacy">Privacy Policy.</a>
+          <a href="https://energypal.com/terms">Terms of Service.</a>
         </p>
       </footer>
     </>
