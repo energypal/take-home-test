@@ -13,6 +13,15 @@ module.exports = {
       fontFamily: {
         sans: ["var(--font-roboto)", ...fontFamily.sans],
       },
+
+      colors: {
+        boldBlue: {
+          DEFAULT: "#1155CC",
+        },
+        mediumGray: {
+          DEFAULT: "#888888",
+        },
+      },
     },
   },
   plugins: [],
