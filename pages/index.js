@@ -7,7 +7,7 @@ export default function Home() {
         <title>EnergyPal Take-Home Test</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <section className="font-sans pt-20 pr-8 pl-8 md:pt-36 md:pr-28 md:pl-28 flex flex-col md:flex-row ">
+      <section className="font-sans pt-20 pr-8 pl-8 md:pt-40 md:pr-32 md:pl-32 flex flex-col md:flex-row max-w-[1680px] mx-auto ">
         <header className="flex-1 md:mr-2">
           <h2 className="text-5xl">Get Started</h2>
           <p className="text-2xl mt-4">
@@ -17,20 +17,55 @@ export default function Home() {
         </header>
 
         <form className="flex-1 md:ml-2">
-          <label htmlFor="firstName">First Name</label>
-          <input type="text" id="firstName" name="first_name" />
+          <label className="text-xl" htmlFor="firstName">
+            First Name
+          </label>
+          <input
+            className="border h-11 rounded-3xl"
+            type="text"
+            id="firstName"
+            name="first_name"
+          />
 
-          <label htmlFor="lastName">Last Name</label>
-          <input type="text" id="lastName" name="last_name" />
+          <label className="text-xl" htmlFor="lastName">
+            Last Name
+          </label>
+          <input
+            className="border h-11 rounded-3xl"
+            type="text"
+            id="lastName"
+            name="last_name"
+          />
 
-          <label htmlFor="email">Email Address</label>
-          <input type="email" id="email" name="email" />
+          <label className="text-xl" htmlFor="email">
+            Email Address
+          </label>
+          <input
+            className="border h-11 rounded-3xl"
+            type="email"
+            id="email"
+            name="email"
+          />
 
-          <label htmlFor="phone">Phone Number</label>
-          <input type="tel" id="phone" name="phone" />
+          <label className="text-xl" htmlFor="phone">
+            Phone Number
+          </label>
+          <input
+            className="border h-11 rounded-3xl"
+            type="tel"
+            id="phone"
+            name="phone"
+          />
 
-          <label htmlFor="postalCode">Postal Code</label>
-          <input type="text" id="postalCode" name="zip" />
+          <label className="text-xl" htmlFor="postalCode">
+            Postal Code
+          </label>
+          <input
+            className="border h-11 rounded-3xl"
+            type="text"
+            id="postalCode"
+            name="zip"
+          />
 
           <button type="submit">Submit</button>
 
@@ -43,7 +78,7 @@ export default function Home() {
           </p>
         </form>
       </section>
-      <footer>
+      <footer className="">
         <p>
           © 2023 EnergyPal. All rights reserved. Privacy Policy. Terms of
           Service.
