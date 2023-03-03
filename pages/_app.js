@@ -9,7 +9,7 @@ const roboto = Roboto({
 
 function MyApp({ Component, pageProps }) {
   return (
-    <div className={`${roboto.variable} font-sans`}>
+    <div className={`${roboto.variable} font-sans h-screen`}>
       <Component {...pageProps} />
     </div>
   );
