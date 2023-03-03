@@ -1,5 +1,4 @@
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
 
 export default function Home() {
   return (
@@ -8,9 +7,9 @@ export default function Home() {
         <title>EnergyPal Take-Home Test</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <section>
-        <header>
-          <h2>Get Started</h2>
+      <section className="font-sans pt-20 pr-8 pl-8 md:pt-36 md:pr-28 md:pl-28 flex flex-col md:flex-row ">
+        <header className="">
+          <h2 className="text-5xl">Get Started</h2>
           <p>
             Speak to an EnergyPal advisor about our current deals on solar
             panels and home batteries.
@@ -43,14 +42,13 @@ export default function Home() {
             is optional, opt out anytime.
           </p>
         </form>
-
-        <footer>
-          <p>
-            © 2023 EnergyPal. All rights reserved. Privacy Policy. Terms of
-            Service.
-          </p>
-        </footer>
       </section>
+      <footer>
+        <p>
+          © 2023 EnergyPal. All rights reserved. Privacy Policy. Terms of
+          Service.
+        </p>
+      </footer>
     </>
   );
 }
