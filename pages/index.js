@@ -1,6 +1,14 @@
 import Head from "next/head";
+import { useForm } from "react-hook-form";
 
 export default function Home() {
+  // Destructure react-hook-form APIs
+  const { register, handleSubmit } = useForm();
+
+  const transmitForm = (data) => {
+    console.log("SUBMITTING", data);
+  };
+
   return (
     <>
       <Head>
@@ -17,7 +25,10 @@ export default function Home() {
           </p>
         </header>
 
-        <form className="flex-1 md:ml-4 grid md:grid-cols-2 gap-y-3 md:gap-y-4 md:gap-x-8 mb-12">
+        <form
+          className="flex-1 md:ml-4 grid md:grid-cols-2 gap-y-3 md:gap-y-4 md:gap-x-8 mb-12"
+          onSubmit={handleSubmit(transmitForm)}
+        >
           <label className="text-mediumGray text-xl" htmlFor="firstName">
             First Name
           </label>
@@ -25,7 +36,7 @@ export default function Home() {
             className="px-5 border-[2px]  h-12 rounded-full md:col-start-1 md:col-end-2"
             type="text"
             id="firstName"
-            name="first_name"
+            {...register("firstName", { required: "First name is required" })}
           />
 
           <label
@@ -38,7 +49,7 @@ export default function Home() {
             className="px-5 border-[2px] h-12 rounded-full md:col-start-2"
             type="text"
             id="lastName"
-            name="last_name"
+            {...register("lastName", { required: "Last name is required" })}
           />
 
           <label className="text-mediumGray text-xl" htmlFor="email">
@@ -48,20 +59,24 @@ export default function Home() {
             className="px-5 border-[2px] h-12 rounded-full md:col-start-1 md:col-end-2"
             type="email"
             id="email"
-            name="email"
+            {...register("email", { required: "Email is required" })}
           />
 
           <label
             className="text-mediumGray text-xl md:row-start-3 md:col-start-2"
-            htmlFor="phone"
+            htmlFor="phoneNumber"
           >
             Phone Number
           </label>
           <input
             className="px-5 border-[2px] h-12 rounded-full md:col-start-2"
             type="tel"
-            id="phone"
-            name="phone"
+            id="phoneNumber"
+            {...register("phoneNumber", {
+              required: "Phone number is required",
+              minLength: 10,
+              maxLength: 10,
+            })}
           />
 
           <label className="text-mediumGray text-xl" htmlFor="postalCode">
@@ -71,7 +86,11 @@ export default function Home() {
             className="px-5 border-[2px] h-12 rounded-full md:col-span-2"
             type="text"
             id="postalCode"
-            name="zip"
+            {...register("postalCode", {
+              required: "Postal code is required",
+              minLength: 6,
+              maxLength: 6,
+            })}
           />
 
           <button
