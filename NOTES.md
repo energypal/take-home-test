@@ -8,17 +8,21 @@
 
 ### [x] Add padding to inputs
 
-### [ ] Style and make responsive
+### [x] Style and make responsive
 
 ### [ ] Handle form submission and display result
 
 ### [ ] Add form validation
 
+### [ ] Validation messages displacing grid layout (large)
+
+### [ ] Phone no. and postal code inputs to enforce strict formats (e.g. numbers only & alternating letters/numbers; length)
+
 <br>
 
 # Timekeeping
 
-## Total hours: 5h
+## Total hours:
 
 Day 1
 
@@ -34,10 +38,17 @@ Day 2
 
 Day 3
 
+- Learning React Hook Form: 0.5h
+- Implementing form with RHF: 2.5h
+- Adjusting style and responsiveness: 0.5h
+
   <br>
 
 # Improvement Ideas
 
 - Intermediate layout between small and large layouts
-- Input placeholders to show examples / structure
+- Phone and postal code input placeholders to show expected format like [(...) ... ....]
 - Dark mode
+- ~~Implement email validation using react-hook-form to replace built-in validation for consistency~~ Built-in validation tooltip still shows up on submit
+- More robust email validation? Regex cannot cover all possible email addresses and cannot determine if it's a real address
+- Accessibility - attributes like aria-invalid, role in the HTML elements
