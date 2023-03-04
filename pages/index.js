@@ -3,12 +3,17 @@ import { useForm } from "react-hook-form";
 
 export default function Home() {
   // Destructure react-hook-form APIs
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const transmitForm = (data) => {
     console.log("SUBMITTING", data);
   };
 
+  console.log("ERRORS obj", errors);
   return (
     <>
       <Head>
@@ -16,8 +21,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <section className="font-sans pt-16 pr-8 pl-8 md:pt-40 md:pr-32 md:pl-32 flex flex-col md:flex-row max-w-[1680px] min-w-[323px] mx-auto">
-        <header className="flex-1 md:mr-4">
+      <section className="font-sans pt-16 pr-8 pl-8 lg:pt-40 lg:pr-32 lg:pl-32 flex flex-col lg:flex-row max-w-[1680px] min-w-[323px] mx-auto">
+        <header className="flex-1 lg:mr-4">
           <h2 className="text-5xl">Get Started</h2>
           <p className="text-2xl mt-4 mb-8 ">
             Speak to an EnergyPal advisor about our current deals on solar
@@ -26,82 +31,130 @@ export default function Home() {
         </header>
 
         <form
-          className="flex-1 md:ml-4 grid md:grid-cols-2 gap-y-3 md:gap-y-4 md:gap-x-8 mb-12"
+          className="flex-1 lg:ml-4 grid lg:grid-cols-2 gap-y-3 lg:gap-y-4 lg:gap-x-8 mb-12"
           onSubmit={handleSubmit(transmitForm)}
         >
           <label className="text-mediumGray text-xl" htmlFor="firstName">
             First Name
           </label>
           <input
-            className="px-5 border-[2px]  h-12 rounded-full md:col-start-1 md:col-end-2"
+            className="px-5 border-[2px]  h-12 rounded-full lg:col-start-1 lg:col-end-2"
             type="text"
             id="firstName"
             {...register("firstName", { required: "First name is required" })}
           />
+          {errors.firstName?.type === "required" && (
+            <p className="text-sm text-red-600 lg:col-start-1 lg:col-end-2 pl-1">
+              {errors.firstName.message}
+            </p>
+          )}
 
           <label
-            className="text-mediumGray text-xl  md:col-start-2 md:row-start-1"
+            className="text-mediumGray text-xl  lg:col-start-2 lg:row-start-1"
             htmlFor="lastName"
           >
             Last Name
           </label>
           <input
-            className="px-5 border-[2px] h-12 rounded-full md:col-start-2"
+            className="px-5 border-[2px] h-12 rounded-full lg:col-start-2 lg:row-start-2"
             type="text"
             id="lastName"
             {...register("lastName", { required: "Last name is required" })}
           />
+          {errors.lastName?.type === "required" && (
+            <p className="text-sm text-red-600 lg:col-start-2 lg:row-start-3 pl-1">
+              {errors.lastName.message}
+            </p>
+          )}
 
           <label className="text-mediumGray text-xl" htmlFor="email">
             Email Address
           </label>
           <input
-            className="px-5 border-[2px] h-12 rounded-full md:col-start-1 md:col-end-2"
+            className="px-5 border-[2px] h-12 rounded-full lg:col-start-1 lg:col-end-2"
             type="email"
+            inputMode="email"
             id="email"
-            {...register("email", { required: "Email is required" })}
+            {...register("email", {
+              required: "Email is required",
+              // Following regex only checks if the value meets this format: ____@____.____
+              pattern: { value: /\S+@\S+\.\S+/, message: "Invalid email" },
+            })}
           />
+          {errors.email?.type === "required" && (
+            <p className="text-sm text-red-600 lg:col-start-1 lg:col-end-2 pl-1">
+              {errors.email.message}
+            </p>
+          )}
+          {errors.email?.type === "pattern" && (
+            <p className="text-sm text-red-600 lg:col-start-1 lg:col-end-2 pl-1">
+              {errors.email.message}
+            </p>
+          )}
 
           <label
-            className="text-mediumGray text-xl md:row-start-3 md:col-start-2"
+            className="text-mediumGray text-xl lg:col-start-2 lg:row-start-4"
             htmlFor="phoneNumber"
           >
             Phone Number
           </label>
           <input
-            className="px-5 border-[2px] h-12 rounded-full md:col-start-2"
+            className="px-5 border-[2px] h-12 rounded-full lg:col-start-2 lg:row-start-4"
             type="tel"
+            inputMode="tel"
             id="phoneNumber"
             {...register("phoneNumber", {
               required: "Phone number is required",
-              minLength: 10,
-              maxLength: 10,
+              minLength: { value: 10, message: "Invalid phone number" },
+              maxLength: { value: 10, message: "Invalid phone number" },
             })}
           />
+          {errors.phoneNumber?.type === "required" && (
+            <p className="text-sm text-red-600 lg:col-start-2 pl-1 lg:row-start-5">
+              {errors.phoneNumber.message}
+            </p>
+          )}
+          {(errors.phoneNumber?.type === "minLength" ||
+            errors.phoneNumber?.type === "maxLength") && (
+            <p className="text-sm text-red-600 lg:col-start-2 pl-1 lg:row-start-5">
+              {errors.phoneNumber.message}
+            </p>
+          )}
 
           <label className="text-mediumGray text-xl" htmlFor="postalCode">
             Postal Code
           </label>
           <input
-            className="px-5 border-[2px] h-12 rounded-full md:col-span-2"
+            className="px-5 border-[2px] h-12 rounded-full lg:col-span-2"
             type="text"
             id="postalCode"
             {...register("postalCode", {
               required: "Postal code is required",
-              minLength: 6,
-              maxLength: 6,
+              minLength: { value: 6, message: "Invalid postal code" },
+              maxLength: { value: 6, message: "Invalid postal code" },
             })}
           />
+          {errors.postalCode?.type === "required" && (
+            <p className="text-sm text-red-600 lg:col-start-1 pl-1">
+              {errors.postalCode.message}
+            </p>
+          )}
+          {(errors.postalCode?.type === "minLength" ||
+            errors.postalCode?.type === "maxLength") && (
+            <p className="text-sm text-red-600 lg:col-start-1 pl-1">
+              {errors.postalCode.message}
+            </p>
+          )}
 
           <button
-            className="bg-boldBlue text-white py-4 rounded-full w-1/2 md:w-3/5 
-            max-w-[320px] text-2xl font-medium md:col-span-2 md:justify-self-center my-4"
+            className="bg-boldBlue text-white py-4 rounded-full w-1/2 lg:w-3/5 
+            max-w-[320px] text-2xl font-medium lg:col-span-2 lg:justify-self-center my-4"
             type="submit"
           >
             Submit
           </button>
 
-          <p className="md:col-span-2 text-mediumGray ">
+          <p className="lg:col-span-2 text-mediumGray ">
             Thanks for your interest in EnergyPal! By clicking above, you agree
             we may call and text you about EnergyPal products at the number
             provided even if on a "do not call" list, using pre-recorded
@@ -113,7 +166,7 @@ export default function Home() {
 
       <footer className="px-4">
         <p className="text-center text-mediumGray">
-          © 2023 EnergyPal. All rights reserved.{" "}
+          © 2023 EnergyPal. All rights reserved.
           <a href="https://energypal.com/privacy">Privacy Policy.</a>
           <a href="https://energypal.com/terms">Terms of Service.</a>
         </p>
