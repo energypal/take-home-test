@@ -22,6 +22,7 @@ export default function Home() {
       </Head>
 
       <section className="font-sans pt-16 pr-8 pl-8 lg:pt-40 lg:pr-32 lg:pl-32 flex flex-col lg:flex-row max-w-[1680px] min-w-[323px] mx-auto">
+        {/* TITLE AND TEXT */}
         <header className="flex-1 lg:mr-4">
           <h2 className="text-5xl">Get Started</h2>
           <p className="text-2xl mt-4 mb-8 ">
@@ -30,10 +31,12 @@ export default function Home() {
           </p>
         </header>
 
+        {/* FORM */}
         <form
           className="flex-1 lg:ml-4 grid lg:grid-cols-2 gap-y-3 lg:gap-y-4 lg:gap-x-8 mb-12"
           onSubmit={handleSubmit(transmitForm)}
         >
+          {/* FIRST NAME */}
           <label className="text-mediumGray text-xl" htmlFor="firstName">
             First Name
           </label>
@@ -49,6 +52,7 @@ export default function Home() {
             </p>
           )}
 
+          {/* LAST NAME */}
           <label
             className="text-mediumGray text-xl  lg:col-start-2 lg:row-start-1"
             htmlFor="lastName"
@@ -67,6 +71,7 @@ export default function Home() {
             </p>
           )}
 
+          {/* EMAIL */}
           <label className="text-mediumGray text-xl" htmlFor="email">
             Email Address
           </label>
@@ -92,6 +97,7 @@ export default function Home() {
             </p>
           )}
 
+          {/* PHONE NUMBER */}
           <label
             className="text-mediumGray text-xl lg:col-start-2 lg:row-start-4"
             htmlFor="phoneNumber"
@@ -121,6 +127,7 @@ export default function Home() {
             </p>
           )}
 
+          {/* POSTAL CODE */}
           <label
             className="text-mediumGray text-xl lg:col-start-1"
             htmlFor="postalCode"
@@ -167,6 +174,7 @@ export default function Home() {
         </form>
       </section>
 
+      {/* FOOTER */}
       <footer className="px-4">
         <p className="text-center text-mediumGray">
           © 2023 EnergyPal. All rights reserved.
