@@ -121,7 +121,10 @@ export default function Home() {
             </p>
           )}
 
-          <label className="text-mediumGray text-xl" htmlFor="postalCode">
+          <label
+            className="text-mediumGray text-xl lg:col-start-1"
+            htmlFor="postalCode"
+          >
             Postal Code
           </label>
           <input
