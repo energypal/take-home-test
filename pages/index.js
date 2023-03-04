@@ -37,128 +37,129 @@ export default function Home() {
           onSubmit={handleSubmit(transmitForm)}
         >
           {/* FIRST NAME */}
-          <label className="text-mediumGray text-xl" htmlFor="firstName">
-            First Name
-          </label>
-          <input
-            className="px-5 border-[2px]  h-12 rounded-full lg:col-start-1 lg:col-end-2"
-            type="text"
-            id="firstName"
-            {...register("firstName", { required: "First name is required" })}
-          />
-          {errors.firstName?.type === "required" && (
-            <p className="text-sm text-red-600 lg:col-start-1 lg:col-end-2 pl-1">
-              {errors.firstName.message}
-            </p>
-          )}
+          <div className="lg:col-start-1">
+            <label className="text-mediumGray text-xl" htmlFor="firstName">
+              First Name
+            </label>
+            <input
+              className="px-5 border-[2px]  h-12 rounded-full w-full"
+              type="text"
+              id="firstName"
+              {...register("firstName", { required: "First name is required" })}
+            />
+            {errors.firstName?.type === "required" && (
+              <p className="text-sm text-red-600 ml-1 mt-1">
+                {errors.firstName.message}
+              </p>
+            )}
+          </div>
 
           {/* LAST NAME */}
-          <label
-            className="text-mediumGray text-xl  lg:col-start-2 lg:row-start-1"
-            htmlFor="lastName"
-          >
-            Last Name
-          </label>
-          <input
-            className="px-5 border-[2px] h-12 rounded-full lg:col-start-2 lg:row-start-2"
-            type="text"
-            id="lastName"
-            {...register("lastName", { required: "Last name is required" })}
-          />
-          {errors.lastName?.type === "required" && (
-            <p className="text-sm text-red-600 lg:col-start-2 lg:row-start-3 pl-1">
-              {errors.lastName.message}
-            </p>
-          )}
+          <div className="lg:col-start-2">
+            <label className="text-mediumGray text-xl  " htmlFor="lastName">
+              Last Name
+            </label>
+            <input
+              className="w-full px-5 border-[2px] h-12 rounded-full"
+              type="text"
+              id="lastName"
+              {...register("lastName", { required: "Last name is required" })}
+            />
+            {errors.lastName?.type === "required" && (
+              <p className="text-sm text-red-600 ml-1 mt-1">
+                {errors.lastName.message}
+              </p>
+            )}
+          </div>
 
           {/* EMAIL */}
-          <label className="text-mediumGray text-xl" htmlFor="email">
-            Email Address
-          </label>
-          <input
-            className="px-5 border-[2px] h-12 rounded-full lg:col-start-1 lg:col-end-2"
-            type="email"
-            inputMode="email"
-            id="email"
-            {...register("email", {
-              required: "Email is required",
-              // Following regex only checks if the value meets this format: ____@____.____
-              pattern: { value: /\S+@\S+\.\S+/, message: "Invalid email" },
-            })}
-          />
-          {errors.email?.type === "required" && (
-            <p className="text-sm text-red-600 lg:col-start-1 lg:col-end-2 pl-1">
-              {errors.email.message}
-            </p>
-          )}
-          {errors.email?.type === "pattern" && (
-            <p className="text-sm text-red-600 lg:col-start-1 lg:col-end-2 pl-1">
-              {errors.email.message}
-            </p>
-          )}
+          <div className="lg:col-start-1 ">
+            <label className="text-mediumGray text-xl" htmlFor="email">
+              Email Address
+            </label>
+            <input
+              className="w-full px-5 border-[2px] h-12 rounded-full "
+              type="email"
+              inputMode="email"
+              id="email"
+              {...register("email", {
+                required: "Email is required",
+                // Following regex only checks if the value meets this format: ____@____.____
+                pattern: { value: /\S+@\S+\.\S+/, message: "Invalid email" },
+              })}
+            />
+            {errors.email?.type === "required" && (
+              <p className="text-sm text-red-600 ml-1 mt-1">
+                {errors.email.message}
+              </p>
+            )}
+            {errors.email?.type === "pattern" && (
+              <p className="text-sm text-red-600 ml-1 mt-1">
+                {errors.email.message}
+              </p>
+            )}
+          </div>
 
           {/* PHONE NUMBER */}
-          <label
-            className="text-mediumGray text-xl lg:col-start-2 lg:row-start-4"
-            htmlFor="phoneNumber"
-          >
-            Phone Number
-          </label>
-          <input
-            className="px-5 border-[2px] h-12 rounded-full lg:col-start-2 lg:row-start-4"
-            type="tel"
-            inputMode="tel"
-            id="phoneNumber"
-            {...register("phoneNumber", {
-              required: "Phone number is required",
-              minLength: { value: 10, message: "Invalid phone number" },
-              maxLength: { value: 10, message: "Invalid phone number" },
-            })}
-          />
-          {errors.phoneNumber?.type === "required" && (
-            <p className="text-sm text-red-600 lg:col-start-2 pl-1 lg:row-start-5">
-              {errors.phoneNumber.message}
-            </p>
-          )}
-          {(errors.phoneNumber?.type === "minLength" ||
-            errors.phoneNumber?.type === "maxLength") && (
-            <p className="text-sm text-red-600 lg:col-start-2 pl-1 lg:row-start-5">
-              {errors.phoneNumber.message}
-            </p>
-          )}
+          <div className="lg:col-start-2">
+            <label className="text-mediumGray text-xl " htmlFor="phoneNumber">
+              Phone Number
+            </label>
+            <input
+              className="w-full px-5 border-[2px] h-12 rounded-full"
+              type="tel"
+              inputMode="tel"
+              id="phoneNumber"
+              {...register("phoneNumber", {
+                required: "Phone number is required",
+                minLength: { value: 10, message: "Invalid phone number" },
+                maxLength: { value: 10, message: "Invalid phone number" },
+              })}
+            />
+            {errors.phoneNumber?.type === "required" && (
+              <p className="text-sm text-red-600 ml-1 mt-1">
+                {errors.phoneNumber.message}
+              </p>
+            )}
+            {(errors.phoneNumber?.type === "minLength" ||
+              errors.phoneNumber?.type === "maxLength") && (
+              <p className="text-sm text-red-600 ml-1 mt-1">
+                {errors.phoneNumber.message}
+              </p>
+            )}
+          </div>
 
           {/* POSTAL CODE */}
-          <label
-            className="text-mediumGray text-xl lg:col-start-1"
-            htmlFor="postalCode"
-          >
-            Postal Code
-          </label>
-          <input
-            className="px-5 border-[2px] h-12 rounded-full lg:col-span-2"
-            type="text"
-            id="postalCode"
-            {...register("postalCode", {
-              required: "Postal code is required",
-              minLength: { value: 6, message: "Invalid postal code" },
-              maxLength: { value: 6, message: "Invalid postal code" },
-            })}
-          />
-          {errors.postalCode?.type === "required" && (
-            <p className="text-sm text-red-600 lg:col-start-1 pl-1">
-              {errors.postalCode.message}
-            </p>
-          )}
-          {(errors.postalCode?.type === "minLength" ||
-            errors.postalCode?.type === "maxLength") && (
-            <p className="text-sm text-red-600 lg:col-start-1 pl-1">
-              {errors.postalCode.message}
-            </p>
-          )}
+          <div className="lg:col-start-1 lg:col-span-2">
+            <label className="text-mediumGray text-xl " htmlFor="postalCode">
+              Postal Code
+            </label>
+            <input
+              className="w-full px-5 border-[2px] h-12 rounded-full "
+              type="text"
+              id="postalCode"
+              {...register("postalCode", {
+                required: "Postal code is required",
+                minLength: { value: 6, message: "Invalid postal code" },
+                maxLength: { value: 6, message: "Invalid postal code" },
+              })}
+            />
+            {errors.postalCode?.type === "required" && (
+              <p className="text-sm text-red-600 ml-1 mt-1">
+                {errors.postalCode.message}
+              </p>
+            )}
+            {(errors.postalCode?.type === "minLength" ||
+              errors.postalCode?.type === "maxLength") && (
+              <p className="text-sm text-red-600 ml-1 mt-1">
+                {errors.postalCode.message}
+              </p>
+            )}
+          </div>
 
           <button
-            className="bg-boldBlue text-white py-4 rounded-full w-1/2 lg:w-3/5 
-            max-w-[320px] text-2xl font-medium lg:col-span-2 lg:justify-self-center my-4"
+            className="bg-boldBlue text-white py-4 rounded-full w-1/2 lg:w-3/5 min-w-[130px]
+            max-w-[320px] text-2xl font-medium lg:col-span-2 lg:justify-self-center mt-4 mb-6"
             type="submit"
           >
             Submit
