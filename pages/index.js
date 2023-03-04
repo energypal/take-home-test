@@ -42,7 +42,7 @@ export default function Home() {
               First Name
             </label>
             <input
-              className="px-5 border-[2px]  h-12 rounded-full w-full"
+              className="px-5 border-[2px]  h-12 rounded-full w-full mt-2"
               type="text"
               id="firstName"
               {...register("firstName", { required: "First name is required" })}
@@ -56,11 +56,11 @@ export default function Home() {
 
           {/* LAST NAME */}
           <div className="lg:col-start-2">
-            <label className="text-mediumGray text-xl  " htmlFor="lastName">
+            <label className="text-mediumGray text-xl" htmlFor="lastName">
               Last Name
             </label>
             <input
-              className="w-full px-5 border-[2px] h-12 rounded-full"
+              className="w-full px-5 border-[2px] h-12 rounded-full mt-2"
               type="text"
               id="lastName"
               {...register("lastName", { required: "Last name is required" })}
@@ -78,7 +78,7 @@ export default function Home() {
               Email Address
             </label>
             <input
-              className="w-full px-5 border-[2px] h-12 rounded-full "
+              className="w-full px-5 border-[2px] h-12 rounded-full mt-2"
               type="email"
               inputMode="email"
               id="email"
@@ -106,7 +106,7 @@ export default function Home() {
               Phone Number
             </label>
             <input
-              className="w-full px-5 border-[2px] h-12 rounded-full"
+              className="w-full px-5 border-[2px] h-12 rounded-full mt-2"
               type="tel"
               inputMode="tel"
               id="phoneNumber"
@@ -135,7 +135,7 @@ export default function Home() {
               Postal Code
             </label>
             <input
-              className="w-full px-5 border-[2px] h-12 rounded-full "
+              className="w-full px-5 border-[2px] h-12 rounded-full mt-2"
               type="text"
               id="postalCode"
               {...register("postalCode", {
