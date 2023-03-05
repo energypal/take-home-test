@@ -162,7 +162,8 @@ export default function Home() {
               </label>
               <input
                 className="w-full px-5 border-[2px] h-12 rounded-full mt-2"
-                type="text"
+                type="number"
+                inputMode="numeric"
                 id="postalCode"
                 {...register("postalCode", {
                   required: "Postal code is required",
