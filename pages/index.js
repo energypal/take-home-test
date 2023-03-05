@@ -105,7 +105,7 @@ export default function Home() {
               </label>
               <input
                 className="w-full px-5 border-[2px] h-12 rounded-full mt-2"
-                type="text"
+                type="text" // Type set to text instead of email to prevent built-in validation tooltip
                 inputMode="email"
                 id="email"
                 {...register("email", {
