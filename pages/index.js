@@ -162,7 +162,7 @@ export default function Home() {
               </label>
               <input
                 className="w-full px-5 border-[2px] h-12 rounded-full mt-2"
-                type="number"
+                type="text" // Type set to text to prevent step arrows from appearing
                 inputMode="numeric"
                 id="postalCode"
                 {...register("postalCode", {
