@@ -138,8 +138,7 @@ export default function Home() {
                 maxLength={16} // Format to 16 chars including spaces: (123) 456 - 7890
                 {...register("phoneNumber", {
                   required: "Phone number is required",
-                  minLength: { value: 10, message: "Invalid phone number" },
-                  maxLength: { value: 10, message: "Invalid phone number" }, // REMOVE THIS AND ERROR <p>
+                  minLength: { value: 16, message: "Invalid phone number" },
                 })}
               />
               {errors.phoneNumber?.type === "required" && (
@@ -147,8 +146,7 @@ export default function Home() {
                   {errors.phoneNumber.message}
                 </p>
               )}
-              {(errors.phoneNumber?.type === "minLength" ||
-                errors.phoneNumber?.type === "maxLength") && (
+              {errors.phoneNumber?.type === "minLength" && (
                 <p className="text-sm text-red-600 ml-1 mt-1">
                   {errors.phoneNumber.message}
                 </p>
@@ -169,7 +167,6 @@ export default function Home() {
                 {...register("postalCode", {
                   required: "Postal code is required",
                   minLength: { value: 5, message: "Invalid postal code" },
-                  maxLength: { value: 5, message: "Invalid postal code" }, // REMOVE THIS AND ERROR <p>
                 })}
               />
               {errors.postalCode?.type === "required" && (
@@ -177,8 +174,7 @@ export default function Home() {
                   {errors.postalCode.message}
                 </p>
               )}
-              {(errors.postalCode?.type === "minLength" ||
-                errors.postalCode?.type === "maxLength") && (
+              {errors.postalCode?.type === "minLength" && (
                 <p className="text-sm text-red-600 ml-1 mt-1">
                   {errors.postalCode.message}
                 </p>
@@ -208,7 +204,7 @@ export default function Home() {
           <div className="w-11/12 mx-auto min-h-[300px] lg:w-1/2 flex flex-col justify-evenly items-center lg:ml-5">
             <p className="text-2xl lg:text-3xl">{submission.message}</p>
             {submission.status === "unavailable" && (
-              <p className="text-2xl lg:text-3xl ">Please try again.</p>
+              <p className="text-2xl lg:text-3xl ">Please try again</p>
             )}
             <button
               className="bg-boldBlue text-white rounded-full px-[1em] py-[0.5em] text-xl lg:text-2xl font-medium "
