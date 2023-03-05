@@ -68,6 +68,7 @@ export default function Home() {
                 className="px-5 border-[2px]  h-12 rounded-full w-full mt-2"
                 type="text"
                 id="firstName"
+                maxLength={50}
                 {...register("firstName", {
                   required: "First name is required",
                 })}
@@ -88,6 +89,7 @@ export default function Home() {
                 className="w-full px-5 border-[2px] h-12 rounded-full mt-2"
                 type="text"
                 id="lastName"
+                maxLength={50}
                 {...register("lastName", { required: "Last name is required" })}
               />
               {errors.lastName?.type === "required" && (
@@ -107,6 +109,7 @@ export default function Home() {
                 type="text" // Type set to text instead of email to prevent built-in validation tooltip
                 inputMode="email"
                 id="email"
+                maxLength={50}
                 {...register("email", {
                   required: "Email is required",
                   // Following regex only checks if the value meets this format: ____@____.____
