@@ -4,19 +4,19 @@ import Head from "next/head";
 import { useForm } from "react-hook-form";
 
 export default function Home() {
-  // State to handle post-submission feedback
-  const [submission, setSubmission] = useState({
-    status: "",
-    message: "",
-    showDialog: false,
-  });
-
-  // Destructure react-hook-form APIs
+  // React-hook-form APIs
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  // State to handle post-submission feedback
+  const [submission, setSubmission] = useState({
+    status: "",
+    message: "",
+    showDialog: false, // Switch to display either the form or the dialog
+  });
 
   // Function to submit form data to API
   const transmitForm = async (payload) => {
@@ -38,7 +38,7 @@ export default function Home() {
       </Head>
 
       <section className="font-sans pt-16 pr-8 pl-8 lg:pt-40 lg:pr-32 lg:pl-32 flex flex-col lg:flex-row lg:w-full max-w-[1680px] min-w-[323px] mx-auto">
-        {/* TITLE AND TEXT */}
+        {/* TITLE AND DESCRIPTOR */}
         <header className="lg:w-1/2 lg:mr-5">
           <h2 className="text-5xl">Get Started</h2>
           <p className="text-2xl mt-4 mb-8 ">
@@ -47,9 +47,9 @@ export default function Home() {
           </p>
 
           {/* FORM SUBMISSION TEST */}
-          <button onClick={() => transmitForm("TEST PAYLOAD")}>
+          {/* <button onClick={() => transmitForm("TEST PAYLOAD")}>
             TEST FORM SUBMISSION
-          </button>
+          </button> */}
           {/* {submissionResp.status && <p>{submissionResp.status}</p>}
           {submissionResp.message && <p>{submissionResp.message}</p>} */}
         </header>
