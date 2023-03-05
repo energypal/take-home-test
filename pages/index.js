@@ -15,7 +15,7 @@ export default function Home() {
   const [submission, setSubmission] = useState({
     status: "",
     message: "",
-    showDialog: false, // Switch to display either the form or the dialog
+    showDialog: false, // Toggle to display either the form or the dialog
   });
 
   // Function to submit form data to API
@@ -25,7 +25,6 @@ export default function Home() {
       // Update state and display dialog
       setSubmission({ ...response.data, showDialog: true });
     } catch (error) {
-      // Update state and display dialog
       setSubmission({ ...error.response.data, showDialog: true });
     }
   };
@@ -204,7 +203,7 @@ export default function Home() {
           </form>
         )}
 
-        {/* POST SUBMISSION DIALOG */}
+        {/* POST-SUBMISSION DIALOG */}
         {submission.showDialog && (
           <div className="w-11/12 mx-auto min-h-[300px] lg:w-1/2 flex flex-col justify-evenly items-center lg:ml-5">
             <p className="text-2xl lg:text-3xl">{submission.message}</p>
