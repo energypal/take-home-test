@@ -1,7 +1,14 @@
+import axios from "axios";
+import { useState } from "react";
 import Head from "next/head";
 import { useForm } from "react-hook-form";
 
 export default function Home() {
+  const [submissionResp, setSubmissionResp] = useState({
+    status: "",
+    message: "",
+  });
+
   // Destructure react-hook-form APIs
   const {
     register,
@@ -9,11 +16,17 @@ export default function Home() {
     formState: { errors },
   } = useForm();
 
-  const transmitForm = (data) => {
-    console.log("SUBMITTING", data);
+  // Function to submit the form data to the API
+  const transmitForm = async (payload) => {
+    try {
+      const response = await axios.post("/api/submissions", payload);
+      console.log(response);
+      setSubmissionResp(response.data);
+    } catch (error) {
+      setSubmissionResp(error.response.data);
+    }
   };
 
-  console.log("ERRORS obj", errors);
   return (
     <>
       <Head>
@@ -29,6 +42,13 @@ export default function Home() {
             Speak to an EnergyPal advisor about our current deals on solar
             panels and home batteries.
           </p>
+
+          {/* FORM SUBMISSION TEST */}
+          <button onClick={() => transmitForm("TEST PAYLOAD")}>
+            TEST FORM SUBMISSION
+          </button>
+          {submissionResp.status && <p>{submissionResp.status}</p>}
+          {submissionResp.message && <p>{submissionResp.message}</p>}
         </header>
 
         {/* FORM */}
@@ -79,7 +99,7 @@ export default function Home() {
             </label>
             <input
               className="w-full px-5 border-[2px] h-12 rounded-full mt-2"
-              type="email"
+              type="text"
               inputMode="email"
               id="email"
               {...register("email", {
