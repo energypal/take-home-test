@@ -136,10 +136,11 @@ export default function Home() {
                 type="tel"
                 inputMode="tel"
                 id="phoneNumber"
+                maxLength={16} // Format to 16 chars including spaces: (123) 456 - 7890
                 {...register("phoneNumber", {
                   required: "Phone number is required",
                   minLength: { value: 10, message: "Invalid phone number" },
-                  maxLength: { value: 10, message: "Invalid phone number" },
+                  maxLength: { value: 10, message: "Invalid phone number" }, // REMOVE THIS AND ERROR <p>
                 })}
               />
               {errors.phoneNumber?.type === "required" && (
@@ -162,13 +163,14 @@ export default function Home() {
               </label>
               <input
                 className="w-full px-5 border-[2px] h-12 rounded-full mt-2"
-                type="text" // Type set to text to prevent step arrows from appearing
+                type="text"
                 inputMode="numeric"
                 id="postalCode"
+                maxLength={5}
                 {...register("postalCode", {
                   required: "Postal code is required",
-                  minLength: { value: 6, message: "Invalid postal code" },
-                  maxLength: { value: 6, message: "Invalid postal code" },
+                  minLength: { value: 5, message: "Invalid postal code" },
+                  maxLength: { value: 5, message: "Invalid postal code" }, // REMOVE THIS AND ERROR <p>
                 })}
               />
               {errors.postalCode?.type === "required" && (
