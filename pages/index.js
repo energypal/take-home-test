@@ -69,6 +69,7 @@ export default function Home() {
                 type="text"
                 id="firstName"
                 maxLength={50}
+                autoComplete="given-name"
                 {...register("firstName", {
                   required: "First name is required",
                 })}
@@ -90,6 +91,7 @@ export default function Home() {
                 type="text"
                 id="lastName"
                 maxLength={50}
+                autoComplete="family-name"
                 {...register("lastName", { required: "Last name is required" })}
               />
               {errors.lastName?.type === "required" && (
@@ -110,6 +112,7 @@ export default function Home() {
                 inputMode="email"
                 id="email"
                 maxLength={50}
+                autoComplete="email"
                 {...register("email", {
                   required: "Email is required",
                   // Following regex only checks if the value meets this format: ____@____.____
@@ -139,6 +142,7 @@ export default function Home() {
                 inputMode="tel"
                 id="phoneNumber"
                 maxLength={16} // Format to 16 chars including spaces: (123) 456 - 7890
+                autoComplete="tel-national"
                 {...register("phoneNumber", {
                   required: "Phone number is required",
                   minLength: { value: 16, message: "Invalid phone number" },
@@ -167,6 +171,7 @@ export default function Home() {
                 inputMode="numeric"
                 id="postalCode"
                 maxLength={5}
+                autoComplete="postal-code"
                 {...register("postalCode", {
                   required: "Postal code is required",
                   minLength: { value: 5, message: "Invalid postal code" },
