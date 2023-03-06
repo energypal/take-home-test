@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import Head from "next/head";
 import { useForm } from "react-hook-form";
+import { withHookFormMask } from "use-mask-input";
 
 export default function Home() {
   // React-hook-form APIs
@@ -172,10 +173,13 @@ export default function Home() {
                 id="postalCode"
                 maxLength={5}
                 autoComplete="postal-code"
-                {...register("postalCode", {
-                  required: "Postal code is required",
-                  minLength: { value: 5, message: "Invalid postal code" },
-                })}
+                {...withHookFormMask(
+                  register("postalCode", {
+                    required: "Postal code is required",
+                    minLength: { value: 5, message: "Invalid postal code" },
+                  }),
+                  "99999" // Mask that restricts input to five numeric digits
+                )}
               />
               {errors.postalCode?.type === "required" && (
                 <p className="text-sm text-red-600 ml-1 mt-1">
