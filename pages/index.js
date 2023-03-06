@@ -15,7 +15,7 @@ export default function Home() {
   const [submission, setSubmission] = useState({
     status: "",
     message: "",
-    showDialog: false, // Toggle to display either the form or the dialog
+    showDialog: false, // Switch to display either the form or the dialog
   });
 
   // Function to submit form data to API
@@ -44,13 +44,6 @@ export default function Home() {
             Speak to an EnergyPal advisor about our current deals on solar
             panels and home batteries.
           </p>
-
-          {/* FORM SUBMISSION TEST */}
-          {/* <button onClick={() => transmitForm("TEST PAYLOAD")}>
-            TEST FORM SUBMISSION
-          </button> */}
-          {/* {submissionResp.status && <p>{submissionResp.status}</p>}
-          {submissionResp.message && <p>{submissionResp.message}</p>} */}
         </header>
 
         {/* FORM */}
