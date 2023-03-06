@@ -3,6 +3,10 @@ import { useState } from "react";
 import Head from "next/head";
 import { useForm } from "react-hook-form";
 
+const maskPostalCode = (string) => {
+  return string.replace(/\D/g, "");
+};
+
 export default function Home() {
   // React-hook-form APIs
   const {
@@ -168,6 +172,11 @@ export default function Home() {
                 {...register("postalCode", {
                   required: "Postal code is required",
                   minLength: { value: 5, message: "Invalid postal code" },
+                  onChange: (event) => {
+                    const input = event.target.value;
+                    event.target.value = maskPostalCode(input);
+                    // console.log(typeof event.target.value);
+                  },
                 })}
               />
               {errors.postalCode?.type === "required" && (
