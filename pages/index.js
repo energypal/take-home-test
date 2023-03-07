@@ -130,7 +130,7 @@ export default function Home() {
                 autoComplete="email"
                 {...register("email", {
                   required: "Email is required",
-                  // Following regex only checks if the value meets this format: ____@____.____
+                  // Following regex only checks if the value meets this general format: ____@____.____
                   pattern: { value: /\S+@\S+\.\S+/, message: "Invalid email" },
                 })}
               />
