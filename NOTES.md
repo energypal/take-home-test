@@ -16,13 +16,13 @@
 
 ### [x] Implement form validation
 
-### [ ] Add autocomplete attribute
+### [x] Add autocomplete attribute to inputs
 
-### [ ] Implement phone number formatting
+### [x] Implement phone number and postal code input masks
 
 ### [x] Handle form submission and display result
 
-### [ ] Check form payload delivery
+### [x] Check form payload delivery
 
 <br>
 
@@ -55,11 +55,22 @@ Day 4
 - Styling post submission dialog: 1h
 - Working on form: 1h
 
+Day 5
+
+- Working on form: 0.5h
+- Researching RHF \<Controller/> and trying to implement input mask: 2h
+
+Day 6
+
+- Researching react-input-mask and trying to implement input mask: 0.5h
+- Implementing input masks with custom onChange functions: 3h
+
 <br>
 
-# Libraries/Tools
+# Dependencies
 
 - TailwindCSS
+- @next/font
 - React Hook Form
 - axios
 
@@ -67,18 +78,27 @@ Day 4
 
 - Intermediate layout between small and large layouts
 
-- Dark mode
+- Dark mode using Tailwind's _dark:_ variant
 
-- Phone no. input to enforce format: (123) 456 - 7890. Use RHF controlled component integration?
-
-- Placeholder for phone number and postal code inputs?
+- Placeholders for phone number and postal code inputs
 
 - More robust email validation? Regex cannot cover all possible email addresses and cannot determine if it's a real address
 
-- Accessibility: attributes like aria-invalid, role in HTML elements
+- Accessibility: attributes like _aria-invalid_ and _role_
 
 - More responsive submission process such as loading indicator on button and disabled forms while request is being made
 
-- More refined post-submission view, better messages
+- More refined post-submission view, better messaging
 
 - Visual indication on fields themselves when input values are not valid
+
+- Validate onBlur, so that a user can be informed of errors in real-time, instead of getting multiple errors all at once when submitting
+
+- On a longer form, persisting input data locally until it's submitted can prevent data loss and frustration when a user accidentally refreshes or closes the page
+
+- Remove the mask from the phone number, i.e. reverse to just the numbers depending on what's expected at the back end
+
+# Limitations
+
+- react-hook-form V7 does not support IE11
+- Tailwind CSS doesn't support any version of IE, including IE11
