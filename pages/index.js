@@ -3,8 +3,30 @@ import { useState } from "react";
 import Head from "next/head";
 import { useForm } from "react-hook-form";
 
+// Function to normalize postal code input
+const maskPostalCode = (string) => {
+  // Replace all non-numerical characters with empty string
+  return string.replace(/\D/g, "");
+};
+
+// Function to normalize phone number input
+const maskPhoneNumber = (string) => {
+  const substrings = string
+    .replace(/\D/g, "") // Replace all non-numerical characters wit empty string
+    .match(/(\d{0,3})(\d{0,3})(\d{0,4})/); // Capture the three groups that make up a phone number
+
+  // Add parentheses around the area code and dash before the last four digits as digits are being typed
+  return !substrings[2]
+    ? substrings[1]
+    : "(" +
+        substrings[1] +
+        ") " +
+        substrings[2] +
+        (substrings[3] ? " - " + substrings[3] : "");
+};
+
 export default function Home() {
-  // React-hook-form APIs
+  // Extract react-hook-form APIs
   const {
     register,
     handleSubmit,
@@ -15,7 +37,7 @@ export default function Home() {
   const [submission, setSubmission] = useState({
     status: "",
     message: "",
-    showDialog: false, // Toggle to display either the form or the dialog
+    showDialog: false, // Switch to display either the form or the dialog
   });
 
   // Function to submit form data to API
@@ -44,13 +66,6 @@ export default function Home() {
             Speak to an EnergyPal advisor about our current deals on solar
             panels and home batteries.
           </p>
-
-          {/* FORM SUBMISSION TEST */}
-          {/* <button onClick={() => transmitForm("TEST PAYLOAD")}>
-            TEST FORM SUBMISSION
-          </button> */}
-          {/* {submissionResp.status && <p>{submissionResp.status}</p>}
-          {submissionResp.message && <p>{submissionResp.message}</p>} */}
         </header>
 
         {/* FORM */}
@@ -68,6 +83,8 @@ export default function Home() {
                 className="px-5 border-[2px]  h-12 rounded-full w-full mt-2"
                 type="text"
                 id="firstName"
+                maxLength={50}
+                autoComplete="given-name"
                 {...register("firstName", {
                   required: "First name is required",
                 })}
@@ -88,6 +105,8 @@ export default function Home() {
                 className="w-full px-5 border-[2px] h-12 rounded-full mt-2"
                 type="text"
                 id="lastName"
+                maxLength={50}
+                autoComplete="family-name"
                 {...register("lastName", { required: "Last name is required" })}
               />
               {errors.lastName?.type === "required" && (
@@ -107,9 +126,11 @@ export default function Home() {
                 type="text" // Type set to text instead of email to prevent built-in validation tooltip
                 inputMode="email"
                 id="email"
+                maxLength={50}
+                autoComplete="email"
                 {...register("email", {
                   required: "Email is required",
-                  // Following regex only checks if the value meets this format: ____@____.____
+                  // Following regex only checks if the value meets this general format: ____@____.____
                   pattern: { value: /\S+@\S+\.\S+/, message: "Invalid email" },
                 })}
               />
@@ -136,10 +157,14 @@ export default function Home() {
                 inputMode="tel"
                 id="phoneNumber"
                 maxLength={16} // Format to 16 chars including spaces: (123) 456 - 7890
+                autoComplete="tel-national"
                 {...register("phoneNumber", {
                   required: "Phone number is required",
-                  minLength: { value: 10, message: "Invalid phone number" },
-                  maxLength: { value: 10, message: "Invalid phone number" }, // REMOVE THIS AND ERROR <p>
+                  minLength: { value: 16, message: "Invalid phone number" },
+                  onChange: (event) => {
+                    const input = event.target.value;
+                    event.target.value = maskPhoneNumber(input);
+                  },
                 })}
               />
               {errors.phoneNumber?.type === "required" && (
@@ -147,8 +172,7 @@ export default function Home() {
                   {errors.phoneNumber.message}
                 </p>
               )}
-              {(errors.phoneNumber?.type === "minLength" ||
-                errors.phoneNumber?.type === "maxLength") && (
+              {errors.phoneNumber?.type === "minLength" && (
                 <p className="text-sm text-red-600 ml-1 mt-1">
                   {errors.phoneNumber.message}
                 </p>
@@ -166,10 +190,15 @@ export default function Home() {
                 inputMode="numeric"
                 id="postalCode"
                 maxLength={5}
+                autoComplete="postal-code"
                 {...register("postalCode", {
                   required: "Postal code is required",
                   minLength: { value: 5, message: "Invalid postal code" },
-                  maxLength: { value: 5, message: "Invalid postal code" }, // REMOVE THIS AND ERROR <p>
+                  onChange: (event) => {
+                    const input = event.target.value;
+                    event.target.value = maskPostalCode(input);
+                    // console.log(typeof event.target.value);
+                  },
                 })}
               />
               {errors.postalCode?.type === "required" && (
@@ -177,8 +206,7 @@ export default function Home() {
                   {errors.postalCode.message}
                 </p>
               )}
-              {(errors.postalCode?.type === "minLength" ||
-                errors.postalCode?.type === "maxLength") && (
+              {errors.postalCode?.type === "minLength" && (
                 <p className="text-sm text-red-600 ml-1 mt-1">
                   {errors.postalCode.message}
                 </p>
@@ -208,7 +236,7 @@ export default function Home() {
           <div className="w-11/12 mx-auto min-h-[300px] lg:w-1/2 flex flex-col justify-evenly items-center lg:ml-5">
             <p className="text-2xl lg:text-3xl">{submission.message}</p>
             {submission.status === "unavailable" && (
-              <p className="text-2xl lg:text-3xl ">Please try again.</p>
+              <p className="text-2xl lg:text-3xl ">Please try again</p>
             )}
             <button
               className="bg-boldBlue text-white rounded-full px-[1em] py-[0.5em] text-xl lg:text-2xl font-medium "
