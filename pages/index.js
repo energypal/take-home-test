@@ -1,41 +1,264 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import axios from "axios";
+import { useState } from "react";
+import Head from "next/head";
+import { useForm } from "react-hook-form";
+
+// Function to normalize postal code input
+const maskPostalCode = (string) => {
+  // Replace all non-numerical characters with empty string
+  return string.replace(/\D/g, "");
+};
+
+// Function to normalize phone number input
+const maskPhoneNumber = (string) => {
+  const substrings = string
+    .replace(/\D/g, "") // Replace all non-numerical characters wit empty string
+    .match(/(\d{0,3})(\d{0,3})(\d{0,4})/); // Capture the three groups that make up a phone number
+
+  // Add parentheses around the area code and dash before the last four digits as digits are being typed
+  return !substrings[2]
+    ? substrings[1]
+    : "(" +
+        substrings[1] +
+        ") " +
+        substrings[2] +
+        (substrings[3] ? " - " + substrings[3] : "");
+};
 
 export default function Home() {
+  // Extract react-hook-form APIs
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  // State to handle post-submission feedback
+  const [submission, setSubmission] = useState({
+    status: "",
+    message: "",
+    showDialog: false, // Switch to display either the form or the dialog
+  });
+
+  // Function to submit form data to API
+  const transmitForm = async (payload) => {
+    try {
+      const response = await axios.post("/api/submissions", payload);
+      // Update state and display dialog
+      setSubmission({ ...response.data, showDialog: true });
+    } catch (error) {
+      setSubmission({ ...error.response.data, showDialog: true });
+    }
+  };
+
   return (
-    <div className={styles.container}>
+    <>
       <Head>
         <title>EnergyPal Take-Home Test</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://energypal.com">EnergyPal!</a>
-        </h1>
+      <section className="font-sans pt-16 pr-8 pl-8 lg:pt-40 lg:pr-32 lg:pl-32 flex flex-col lg:flex-row lg:w-full max-w-[1680px] min-w-[323px] mx-auto">
+        {/* TITLE AND DESCRIPTOR */}
+        <header className="lg:w-1/2 lg:mr-5">
+          <h2 className="text-5xl">Get Started</h2>
+          <p className="text-2xl mt-4 mb-8 ">
+            Speak to an EnergyPal advisor about our current deals on solar
+            panels and home batteries.
+          </p>
+        </header>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-        
-        <div>
-          <form>
-            First Name: <input type="text" name="first_name" /><br/>
-            
-            Last Name: <input type="text" name="last_name" /><br/>
-            
-            Email: <input type="email" name="email" /><br/>
+        {/* FORM */}
+        {!submission.showDialog && (
+          <form
+            className="lg:w-1/2 lg:ml-5 grid lg:grid-cols-2 gap-y-3 lg:gap-y-4 lg:gap-x-8 mb-12"
+            onSubmit={handleSubmit(transmitForm)}
+          >
+            {/* FIRST NAME */}
+            <div className="lg:col-start-1">
+              <label className="text-mediumGray text-xl" htmlFor="firstName">
+                First Name
+              </label>
+              <input
+                className="px-5 border-[2px]  h-12 rounded-full w-full mt-2"
+                type="text"
+                id="firstName"
+                maxLength={50}
+                autoComplete="given-name"
+                {...register("firstName", {
+                  required: "First name is required",
+                })}
+              />
+              {errors.firstName?.type === "required" && (
+                <p className="text-sm text-red-600 ml-1 mt-1">
+                  {errors.firstName.message}
+                </p>
+              )}
+            </div>
 
-            Phone: <input type="tel" name="phone" /><br/>
+            {/* LAST NAME */}
+            <div className="lg:col-start-2">
+              <label className="text-mediumGray text-xl" htmlFor="lastName">
+                Last Name
+              </label>
+              <input
+                className="w-full px-5 border-[2px] h-12 rounded-full mt-2"
+                type="text"
+                id="lastName"
+                maxLength={50}
+                autoComplete="family-name"
+                {...register("lastName", { required: "Last name is required" })}
+              />
+              {errors.lastName?.type === "required" && (
+                <p className="text-sm text-red-600 ml-1 mt-1">
+                  {errors.lastName.message}
+                </p>
+              )}
+            </div>
 
-            Zip: <input type="text" name="zip" /><br/>
+            {/* EMAIL */}
+            <div className="lg:col-start-1 ">
+              <label className="text-mediumGray text-xl" htmlFor="email">
+                Email Address
+              </label>
+              <input
+                className="w-full px-5 border-[2px] h-12 rounded-full mt-2"
+                type="text" // Type set to text instead of email to prevent built-in validation tooltip
+                inputMode="email"
+                id="email"
+                maxLength={50}
+                autoComplete="email"
+                {...register("email", {
+                  required: "Email is required",
+                  // Following regex only checks if the value meets this general format: ____@____.____
+                  pattern: { value: /\S+@\S+\.\S+/, message: "Invalid email" },
+                })}
+              />
+              {errors.email?.type === "required" && (
+                <p className="text-sm text-red-600 ml-1 mt-1">
+                  {errors.email.message}
+                </p>
+              )}
+              {errors.email?.type === "pattern" && (
+                <p className="text-sm text-red-600 ml-1 mt-1">
+                  {errors.email.message}
+                </p>
+              )}
+            </div>
 
-            <button type="submit">Submit</button>
+            {/* PHONE NUMBER */}
+            <div className="lg:col-start-2">
+              <label className="text-mediumGray text-xl " htmlFor="phoneNumber">
+                Phone Number
+              </label>
+              <input
+                className="w-full px-5 border-[2px] h-12 rounded-full mt-2"
+                type="tel"
+                inputMode="tel"
+                id="phoneNumber"
+                maxLength={16} // Format to 16 chars including spaces: (123) 456 - 7890
+                autoComplete="tel-national"
+                {...register("phoneNumber", {
+                  required: "Phone number is required",
+                  minLength: { value: 16, message: "Invalid phone number" },
+                  onChange: (event) => {
+                    const input = event.target.value;
+                    event.target.value = maskPhoneNumber(input);
+                  },
+                })}
+              />
+              {errors.phoneNumber?.type === "required" && (
+                <p className="text-sm text-red-600 ml-1 mt-1">
+                  {errors.phoneNumber.message}
+                </p>
+              )}
+              {errors.phoneNumber?.type === "minLength" && (
+                <p className="text-sm text-red-600 ml-1 mt-1">
+                  {errors.phoneNumber.message}
+                </p>
+              )}
+            </div>
+
+            {/* POSTAL CODE */}
+            <div className="lg:col-start-1 lg:col-span-2">
+              <label className="text-mediumGray text-xl " htmlFor="postalCode">
+                Postal Code
+              </label>
+              <input
+                className="w-full px-5 border-[2px] h-12 rounded-full mt-2"
+                type="text"
+                inputMode="numeric"
+                id="postalCode"
+                maxLength={5}
+                autoComplete="postal-code"
+                {...register("postalCode", {
+                  required: "Postal code is required",
+                  minLength: { value: 5, message: "Invalid postal code" },
+                  onChange: (event) => {
+                    const input = event.target.value;
+                    event.target.value = maskPostalCode(input);
+                    // console.log(typeof event.target.value);
+                  },
+                })}
+              />
+              {errors.postalCode?.type === "required" && (
+                <p className="text-sm text-red-600 ml-1 mt-1">
+                  {errors.postalCode.message}
+                </p>
+              )}
+              {errors.postalCode?.type === "minLength" && (
+                <p className="text-sm text-red-600 ml-1 mt-1">
+                  {errors.postalCode.message}
+                </p>
+              )}
+            </div>
+
+            <button
+              className="bg-boldBlue text-white py-4 rounded-full w-1/2 lg:w-3/5 min-w-[130px]
+            max-w-[320px] text-2xl font-medium lg:col-span-2 lg:justify-self-center mt-4 mb-6"
+              type="submit"
+            >
+              Submit
+            </button>
+
+            <p className="lg:col-span-2 text-mediumGray ">
+              Thanks for your interest in EnergyPal! By clicking above, you
+              agree we may call and text you about EnergyPal products at the
+              number provided even if on a "do not call" list, using
+              pre-recorded messages or autodialing. Msg and data rates may
+              apply. Your consent is optional, opt out anytime.
+            </p>
           </form>
-        </div>
+        )}
 
-      </main>
-    </div>
-  )
+        {/* POST-SUBMISSION DIALOG */}
+        {submission.showDialog && (
+          <div className="w-11/12 mx-auto min-h-[300px] lg:w-1/2 flex flex-col justify-evenly items-center lg:ml-5">
+            <p className="text-2xl lg:text-3xl">{submission.message}</p>
+            {submission.status === "unavailable" && (
+              <p className="text-2xl lg:text-3xl ">Please try again</p>
+            )}
+            <button
+              className="bg-boldBlue text-white rounded-full px-[1em] py-[0.5em] text-xl lg:text-2xl font-medium "
+              type="button"
+              onClick={() =>
+                setSubmission({ status: "", message: "", showDialog: false })
+              }
+            >
+              Back
+            </button>
+          </div>
+        )}
+      </section>
+
+      {/* FOOTER */}
+      <footer className="px-4 min-w-[323px]">
+        <p className="text-center text-mediumGray">
+          © 2023 EnergyPal. All rights reserved.
+          <a href="https://energypal.com/privacy">Privacy Policy.</a>
+          <a href="https://energypal.com/terms">Terms of Service.</a>
+        </p>
+      </footer>
+    </>
+  );
 }
