@@ -3,12 +3,30 @@ import { useState } from "react";
 import Head from "next/head";
 import { useForm } from "react-hook-form";
 
+// Function to normalize postal code input
 const maskPostalCode = (string) => {
+  // Replace all non-numerical characters with empty string
   return string.replace(/\D/g, "");
 };
 
+// Function to normalize phone number input
+const maskPhoneNumber = (string) => {
+  const substrings = string
+    .replace(/\D/g, "") // Replace all non-numerical characters wit empty string
+    .match(/(\d{0,3})(\d{0,3})(\d{0,4})/); // Capture the three groups that make up a phone number
+
+  // Add parentheses around the area code and dash before the last four digits as digits are being typed
+  return !substrings[2]
+    ? substrings[1]
+    : "(" +
+        substrings[1] +
+        ") " +
+        substrings[2] +
+        (substrings[3] ? " - " + substrings[3] : "");
+};
+
 export default function Home() {
-  // React-hook-form APIs
+  // Extract react-hook-form APIs
   const {
     register,
     handleSubmit,
@@ -143,6 +161,10 @@ export default function Home() {
                 {...register("phoneNumber", {
                   required: "Phone number is required",
                   minLength: { value: 16, message: "Invalid phone number" },
+                  onChange: (event) => {
+                    const input = event.target.value;
+                    event.target.value = maskPhoneNumber(input);
+                  },
                 })}
               />
               {errors.phoneNumber?.type === "required" && (
