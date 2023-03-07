@@ -62,7 +62,7 @@ Day 5
 
 Day 6
 
-- Researching react-input-mask and trying to implement input mask: 0.5h
+- Researching react-input-mask and trying to implement input mask: 1h
 - Implementing input masks with custom onChange functions: 3h
 
 <br>
