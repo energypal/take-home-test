@@ -22,7 +22,7 @@ In terms of functionality, I would add:
 
 - More responsive submission process by displaying some type of loading indicator and disabling the form inputs while the request is being made.
 
-- Consider removing the mask from the phone number, i.e. transform from _(123) 456 - 7890_ back to just the numbers depending on what's expected at the back end.
+- Consider removing the mask from the phone number, i.e. transform from _(123) 456 - 7890_ back to just the numbers depending on what's expected on the back end.
 
 - Validation on each input onBlur, so that a user can be informed of errors right away, instead of getting multiple errors all at once when submitting.
 
